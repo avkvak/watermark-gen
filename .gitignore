@@ -1,0 +1,6 @@
+app/bower
+node_modules
+psd
+dist
+app/index.html
+app/css/main.css
