@@ -1,0 +1,17 @@
+{
+  "name": "hw3asya",
+  "version": "0.0.0",
+  "homepage": "https://github.com/avkvak/watermark-gen",
+  "authors": [
+    "Anastasiya Zaslavskaya <zaslavskayasya@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower",
+    "test",
+    "tests"
+  ]
+}
