@@ -22,13 +22,18 @@
             <!--Основной контент-->
             <section class="center-content">
               <!--Рабочая область-->
-              <sectoin class="workspace"></sectoin>
-              <h1 class="titles">Генератор водяных знаков
-                <!--область для загрузки каринки, видима при загрузке картинки-->
-                <div class="workspase__uploud-image"></div>
-                <!--область для водяного знака, видима уже при его загрузке-->
-                <div class="workspase__wotermark"></div>
-              </h1>
+              <section class="workspace">
+                <h1 class="titles">Генератор водяных знаков</h1>
+                <div class="workspace-inner">
+                  <!--область для загрузки каринки, видима при загрузке картинки-->
+                  <div class="workspase__uploud-image">
+                    <!--область для водяного знака, видима уже при его загрузке-->
+                    <div class="workspase_wotermark-wrap">
+                      <div class="workspase__wotermark"></div>
+                    </div>
+                  </div>
+                </div>
+              </section>
               <!--Панель управления-->
               <aside class="controllers">
                 <h2 class="titles">Настройки</h2>
@@ -61,17 +66,59 @@
                     <div class="position__type-button-wrap"></div>
                     <button class="position__type-button position__type-button_normal"></button>
                     <button class="position__type-button position__type-button_tile"></button>
-                    <!--Окно визаульного позиционирования. Открыто для наполнения -->
+                    <!--Окно визаульного позиционирования. Открыто для наполнения. то, котрое видимо-->
+                    <div class="position__vizual-wrap position__vizual-wrap_active">
+                      <!--сетка режима "нормально"-->
+                      <div class="position_vizual">
+                        <div id="normal" class="grid">
+                          <div class="top-row">
+                            <div class="left"></div>
+                            <div class="center"></div>
+                            <div class="right"></div>
+                          </div>
+                          <div class="middle-row">
+                            <div class="left"></div>
+                            <div class="center"></div>
+                            <div class="right"></div>
+                          </div>
+                          <div class="bottm-row">
+                            <div class="left"></div>
+                            <div class="center"></div>
+                            <div class="right"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Окно визаульного позиционирования. Открыто для наполнения. то, котрое не видимо-->
                     <div class="position__vizual-wrap">
-                      <div class="position_vizual"></div>
+                      <!--Сетка режима "замостить"-->
+                      <div class="position_vizual">
+                        <div id="tile" class="grid">
+                          <div class="top-row">
+                            <div class="left"></div>
+                            <div class="center"></div>
+                            <div class="right"></div>
+                          </div>
+                          <div class="middle-row">
+                            <div class="left"></div>
+                            <div class="center"></div>
+                            <div class="right"></div>
+                          </div>
+                          <div class="bottm-row">
+                            <div class="left"></div>
+                            <div class="center"></div>
+                            <div class="right"></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <!--Кнопки управления-->
                     <div class="position__controller-wrap">
                       <div class="position__controller_X">
-                        <input type="text" class="position__controller_X-input"><a href="#" class="position__controller_X-up"></a><a href="#" class="position_controller_X-down"></a>
+                        <input type="number" placeholder="--" class="position__controller_X-input"><a href="#" class="position__controller_X-up"></a><a href="#" class="position_controller_X-down"></a>
                       </div>
                       <div class="position__controller_Y">
-                        <input type="text" class="position__controller_Y-input"><a href="#" class="position__controller_Y-up"></a><a href="#" class="position_controller_Y-down"></a>
+                        <input type="number" placeholder="--" class="position__controller_Y-input"><a href="#" class="position__controller_Y-up"></a><a href="#" class="position_controller_Y-down"></a>
                       </div>
                     </div>
                   </div>
@@ -79,14 +126,16 @@
                   <div class="opacity">
                     <label class="opasity__label">Прозрачность</label>
                     <div class="opasity__slider-wrap">
-                      <div class="opasity-slider"></div>
+                      <div class="opasity-slider">
+                        <input type="range">
+                      </div>
                     </div>
                   </div>
                   <!--Раздел с кнопками-->
                   <div class="buttons">
                     <div class="buttons-wrap">
-                      <button type="reset" valuae="очистить"></button>
-                      <button type="submit" valuae="скачать"></button>
+                      <button type="reset" value="очистить"></button>
+                      <button type="submit" value="скачать"></button>
                     </div>
                   </div>
                 </form>
