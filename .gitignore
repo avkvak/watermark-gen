@@ -1,1 +1,5 @@
-.idea
+node_modules
+app/bower_components
+app/config.php
+app/images/works
+.idea/

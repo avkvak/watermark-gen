@@ -1,0 +1,24 @@
+{
+  "name": "Loftschool_homework1",
+  "version": "0.0.0",
+  "authors": [
+    "Dima Kovalchuk <kovaldn@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize.css": "~3.0.2",
+    "jquery": "1.11.1",
+    "modernizr": "~2.8.3",
+    "bpopup": "~0.10.0",
+    "qtip2": "~2.2.1",
+    "jquery-file-upload": "~9.8.0",
+    "jquery-placeholder": "~2.0.8"
+  }
+}
