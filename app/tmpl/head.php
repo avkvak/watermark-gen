@@ -1,3 +1,37 @@
+<?php
+session_start();
+
+$host = $_SERVER['SERVER_NAME'];
+
+if (isset($_GET['lang'])){
+  $lang = $_GET['lang'];
+} elseif($_SESSION['lang']){
+  $lang = $_SESSION['lang'];
+} else{
+  $lang = 'ru';
+}
+
+switch($lang){
+  case 'eng':
+  case 'ru':
+    $_SESSION['lang'] = $lang;
+    break;
+  default:
+    $_SESSION['lang'] = 'ru';
+}
+
+if(!file_exists('lang.ini')){
+  die("Not exist file language");
+}
+
+$lang_config = parse_ini_file('lang.ini', true);
+if(!$lang_config){
+  die("Error! Can not read language file!");
+}
+
+$labels = $lang_config[$lang];
+
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -10,26 +44,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- Заголовок берем из PHP переменной -->
-  <title><?php echo $data['title'];?></title>
+  <title><?php echo $labels['title']; ?></title>
 
   <!-- SEO теги -->
   <meta name="description" content="seo here">
   <meta name="keywords" content="seo here"/>
   <meta name="author" content=""/>
 
-  <!-- // favicon -->
-
-  <!-- normalize -->
-  <link rel="stylesheet" href="/app/bower_components/normalize.css/normalize.css" />
-
-  <!-- Основные таблицы -->
-  <link rel="stylesheet" href="/app/styles/main.css">
-
-  <!-- Плагины -->
-  <link rel="stylesheet" type="text/css" href="/app/bower_components/qtip2/jquery.qtip.css">
-
-  <!-- modernizr - исключение, подулючается только в head -->
-  <script src="/app/bower_components/modernizr/modernizr.js"></script>    
 </head>
 <body>
 <!--[if lt IE 7]>
