@@ -37,7 +37,7 @@ gulp.task('sass', function () {
 
 // Компилируем Jade в html
 gulp.task('jade', function() {
-  gulp.src('app/templates/pages/*.jade')
+  gulp.src('app/templates/*.jade')
     .pipe(jade())
     .on('error', log)
     .pipe(prettify({indent_size: 2}))
@@ -48,11 +48,11 @@ gulp.task('jade', function() {
 
 // Подключаем ссылки на bower components
 gulp.task('wiredep', function () {
-  gulp.src('app/templates/common/*.jade')
+  gulp.src('app/templates/*.jade')
     .pipe(wiredep({
       ignorePath: /^(\.\.\/)*\.\./
     }))
-    .pipe(gulp.dest('app/templates/common/'))
+    .pipe(gulp.dest('app/templates/'))
 });
 
 // Запускаем локальный сервер (только после компиляции jade)
