@@ -1,0 +1,14 @@
+{
+  "name": "watermark",
+  "version": "0.0.0",
+  "homepage": "https://github.com/avkvak/watermark-gen",
+  "authors": [
+    "Team #1"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "jquery": "~2.1.4",
+    "normalize-css": "~3.0.3",
+    "materialize": "~0.97.0"
+  }
+}
