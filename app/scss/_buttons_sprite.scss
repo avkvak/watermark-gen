@@ -1,0 +1,77 @@
+.sprite-b {
+    background-image: url(../img/buttons_sprite.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-b-normal_off {
+    width: 19px;
+    height: 19px;
+    background-position: -3px -3px;
+}
+
+.sprite-b-normal_on {
+    width: 19px;
+    height: 19px;
+    background-position: -28px -3px;
+}
+
+.sprite-b-tile_off {
+    width: 19px;
+    height: 19px;
+    background-position: -3px -28px;
+}
+
+.sprite-b-tile_on {
+    width: 19px;
+    height: 19px;
+    background-position: -28px -28px;
+}
+
+.sprite-a {
+    background-image: url(../img/arrows.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-a-down {
+    width: 13px;
+    height: 8px;
+    background-position: -3px -3px;
+}
+
+.sprite-a-down_h {
+    width: 13px;
+    height: 8px;
+    background-position: -3px -17px;
+}
+
+.sprite-a-up {
+    width: 13px;
+    height: 8px;
+    background-position: -22px -3px;
+}
+
+.sprite-a-up_h {
+    width: 13px;
+    height: 8px;
+    background-position: -22px -17px;
+}
+
+.sprite-r {
+    background-image: url(../img/range.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-r-range {
+    width: 22px;
+    height: 22px;
+    background-position: -3px -3px;
+}
+
+.sprite-r-range_h {
+    width: 22px;
+    height: 22px;
+    background-position: -31px -3px;
+}

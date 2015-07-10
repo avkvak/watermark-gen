@@ -45,9 +45,9 @@ html(lang="ru-Ru")
 							//Панель управления
 							aside.controllers
 								h2.controllers-title Настройки
-								form.controllers-form
+								form(action="", method="POST").controllers-form
 									//Раздел загрузки файлов
-									div.uploud
+									div.uploud.block
 										div.input-form
 											div.title-label Исходное изображение
 											label.input-label(for="input-image")
@@ -63,67 +63,51 @@ html(lang="ru-Ru")
 											label(for="input-upload-watermark")
 											input.upload-btn(type="file",name="upload-watermark",id="input-upload-watermark")
 									//Раздел положение wotermark
-									div.position
+									div.position.block
 										div.position-row.clearfix
 											label.position-label Положение
 											//Кнопки преключения режима нормальный/замостить
-											div.position__type-button-wrap.clearfix
-												button.position__type-button.position__type-button_normal
-												button.position__type-button.position__type-button_tile
-										div.position-row-2.clearfix
-											//Окно визаульного позиционирования. Открыто для наполнения. то, котрое видимо
-											div.position__vizual-wrap
-												//сетка режима "нормально"
-												div.position_vizual
-													div.grid#normal
-														div.top-row
-															div.left
-															div.center
-															div.right
-														div.middle-row
-															div.left
-															div.center
-															div.right
-														div.bottm-row
-															div.left
-															div.center
-															div.right
-											//Окно визаульного позиционирования. Открыто для наполнения. то, котрое не видимо
-											div.position__vizual-wrap.position__vizual-wrap--hiden
-												//Сетка режима "замостить"
-												div.position_vizual
-													div.grid#tile
-														div.top-row
-															div.left
-															div.center
-															div.right
-														div.middle-row
-															div.left
-															div.center
-															div.right
-														div.bottm-row
-															div.left
-															div.center
-															div.right
+											div.position__type-button-wrap
+												a(href="#").position__type-button.position__type-button_tile
+												a(href="#").position__type-button.position__type-button_normal.position__type-button_normal-active
+										div.position-row.clearfix
+											//Окно визаульного позиционирования.
+											div.position__grid-wrap
+												//Cетка
+												div.grid#grid
+													div.top-row
+														div.left
+														div.center
+														div.right
+													div.middle-row
+														div.left
+														div.center
+														div.right
+													div.bottom-row
+														div.left
+														div.center
+														div.right
 											//Кнопки управления
 											div.position__controller-wrap
 												div.position__controller_X
-													input.position__controller_X-input(type="text",placeholder="--")
+													span.position__controller_X-description X
+													input.position__controller_X-input(type="text",value="00")
 													a.position__controller_X-up(href="#")
-													a.position_controller_X-down(href="#")
+													a.position__controller_X-down(href="#")
 												div.position__controller_Y
-													input.position__controller_Y-input(type="text",placeholder="--")
+													span.position__controller_Y-description Y
+													input.position__controller_Y-input(type="text",value="00")
 													a.position__controller_Y-up(href="#")
-													a.position_controller_Y-down(href="#")
+													a.position__controller_Y-down(href="#")
 									//Раздел с прозрачностью
-									div.opacity
+									div.opacity.block
 										label.opasity__label Прозрачность
 										div.opasity__slider-wrap
 											div.opasity-slider
-												input(type="range")
+												input(type="range" min="0" max="1" step="0.05" value="1")
 									//Раздел с кнопками
 									div.buttons
-										div.buttons-wrap
+										div.buttons-wrap.clearfix
 											button.btn.btn-res(type="reset",value="Сброс") Сброс
 											button.btn(type="submit",value="скачать") Скачать
 			footer.page-footer
