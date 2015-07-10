@@ -156,6 +156,12 @@ textarea.materialize-textarea {
     }
 }
 
+input[type=text]:disabled, input[type=text][readonly="readonly"], input[type=password]:disabled, input[type=password][readonly="readonly"], input[type=email]:disabled, input[type=email][readonly="readonly"], input[type=url]:disabled, input[type=url][readonly="readonly"], input[type=time]:disabled, input[type=time][readonly="readonly"], input[type=date]:disabled, input[type=date][readonly="readonly"], input[type=datetime-local]:disabled, input[type=datetime-local][readonly="readonly"], input[type=tel]:disabled, input[type=tel][readonly="readonly"], input[type=number]:disabled, input[type=number][readonly="readonly"], input[type=search]:disabled, input[type=search][readonly="readonly"], textarea.materialize-textarea:disabled, textarea.materialize-textarea[readonly="readonly"] {
+	border: 1px solid #9eb2c0!important;
+	color: #9eb2c0;
+}
+
+
 input::-webkit-input-placeholder {font-size: 12px;}
 input:-moz-placeholder {font-size: 12px;}
 
@@ -251,8 +257,8 @@ input:-moz-placeholder {font-size: 12px;}
     float: right;
     display: block;
     border: none;
-    width: 20px;
-    height: 20px;
+    width: 19px;
+    height: 19px;
     margin-right: 5px;
     background-color: transparent;
     @extend .sprite-b;
@@ -261,14 +267,14 @@ input:-moz-placeholder {font-size: 12px;}
 
 .position__type-button_tile {
 	@extend .sprite-b-tile_off;
-	&-active {
+	&-active, &:hover {
 		@extend .sprite-b-tile_on;
 	}
 }
 
 .position__type-button.position__type-button_normal {
 	@extend .sprite-b-normal_off;
-	&-active {
+	&-active, &:hover {
 		@extend .sprite-b-normal_on;
 	}
 }
@@ -474,6 +480,7 @@ input[type=range]::-webkit-slider-runnable-track {
 
 footer.page-footer {
     background-color: transparent;
+    margin-top: 0;
 }
 
 .page-footer-copyright {
