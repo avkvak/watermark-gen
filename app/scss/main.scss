@@ -4,6 +4,30 @@
 
 @import '../bower/materialize/sass/materialize';
 
+/*Положения картинок */
+
+.workspase_wotermark-wrap {
+    position: relative;
+    height: 533px;
+}
+
+.workspase__wotermark-image {
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    top: 0;
+    img {
+        max-width: 100%;
+    }
+}
+
+.workspase__wotermark-watermark {
+
+}
+
+
+
+
 
 html {
     overflow-y: scroll;

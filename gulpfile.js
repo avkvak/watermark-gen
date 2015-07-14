@@ -20,7 +20,9 @@ var gulp = require("gulp"),
     plumber = require('gulp-plumber'),
     prefixer = require('gulp-autoprefixer'),
     notify = require("gulp-notify"),
-    reload = browserSync.reload;
+    reload = browserSync.reload,
+    livereload = require('gulp-livereload'),
+    opn = require('opn');
 
 
 // ====================================================
@@ -35,54 +37,22 @@ gulp.task('sass', function () {
   .pipe(gulp.dest('app/css'));
 });
 
-// Компилируем Jade в html
-gulp.task('jade', function() {
-  gulp.src('app/templates/*.jade')
-    .pipe(jade())
-    .on('error', log)
-    .pipe(prettify({indent_size: 2}))
-    .pipe(gulp.dest('app/'))
-    .pipe(reload({stream: true}))
-    .on('error', notify.onError());
-});
-
-// Подключаем ссылки на bower components
-gulp.task('wiredep', function () {
-  gulp.src('app/templates/*.jade')
-    .pipe(wiredep({
-      ignorePath: /^(\.\.\/)*\.\./
-    }))
-    .pipe(gulp.dest('app/templates/'))
-});
-
-// Запускаем локальный сервер (только после компиляции jade)
-gulp.task('server', ['jade', 'sass'], function () {  
-  browserSync({
-    notify: false,
-    port: 9000,
-    server: {
-      baseDir: 'app'
-    }
-  });  
-});
-
 // слежка и запуск задач 
 gulp.task('watch', function () {
-  gulp.watch('app/templates/**/*.jade', ['jade']);
-  gulp.watch('app/scss/**/*.scss', ['sass']);
-  gulp.watch('bower.json', ['wiredep']);
-  gulp.watch([
-    'app/js/**/*.js',
-    'app/css/**/*.css',
-    'app/*.html'
-  ]).on('change', reload);
+  livereload.listen();
+  gulp.watch('app/scss/**/*.scss', ['sass']).on('change', livereload.changed);
+  gulp.watch('app/css/*.css', ['rel']).on('change', livereload.changed);
+  gulp.watch('app/js/*.js', ['rel']).on('change', livereload.changed);
+  gulp.watch('app/*.php', ['rel']).on('change', livereload.changed);
 });
 
-
+gulp.task('rel', function () {
+  console.log('sucess');
+});
 
 
 // Задача по-умолчанию 
-gulp.task('default', ['server', 'watch']);
+gulp.task('default', ['watch']);
 
 
 // ====================================================
@@ -98,7 +68,7 @@ gulp.task('clean', function () {
 // Переносим HTML, CSS, JS в папку dist 
 gulp.task('useref', function () {
   var assets = useref.assets(); 
-  return gulp.src('app/*.html')
+  return gulp.src('app/*.php')
     .pipe(assets)
     .pipe(gulpif('*.js', uglify()))
     .pipe(gulpif('*.css', prefixer({browsers: ['last 25 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']})))
@@ -139,21 +109,9 @@ gulp.task('dist', ['useref', 'images', 'fonts', 'extras'], function () {
 });
 
 // Собираем папку DIST (только после компиляции Jade)
-gulp.task('build', ['clean', 'jade', 'sass'], function () {
+gulp.task('build', ['clean', 'sass'], function () {
   gulp.start('dist');
 });
-
-// Проверка сборки 
-gulp.task('server-dist', function () {  
-  browserSync({
-    notify: false,
-    port: 9000,
-    server: {
-      baseDir: 'dist'
-    }
-  });
-});
-
 
 // ====================================================
 // ====================================================
