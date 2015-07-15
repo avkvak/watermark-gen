@@ -42,7 +42,7 @@ $labels = $lang_config[$lang];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--seo-->
   <meta name="description" content="сервис по изготовлению водяных знаков">
-  <meta name="author" content="Квашук Андрей, Ильина ЛадаK, Заславская Анастасия, Минка Дмитирий">
+  <meta name="author" content="Квашук Андрей, Ильина Лада, Заславская Анастасия, Минка Дмитирий">
   <meta name="keywords" content="watermark">
   <!--favicon-->
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -59,6 +59,6 @@ $labels = $lang_config[$lang];
 </head>
 
 <body>
-<!--[if lt IE 7]>
+<!--[if lt IE 10]>
   <p class="browsehappy">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="http://browsehappy.com/">обновите</a> его.</p>
 <![endif]-->
