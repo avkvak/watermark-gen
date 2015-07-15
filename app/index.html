@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru-Ru">
+  <head>
+    <title>watermark service</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--seo-->
+    <meta name="description" content="сервис по изготовлению водяных знаков">
+    <meta name="author" content="Квашук Андрей, Ильина Лада, Заславская Анастасия, Минка Дмитирий">
+    <meta name="keywords" content="watermark">
+    <!--favicon-->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!--css-->
+    <link rel="stylesheet" type="text/css" href="bower/normalize.css/normalize.css">
+    <!--js-->
+    <body>
+      <div class="wrapper">
+        <div class="all-content">
+          <div class="container">
+            <!--Основной контент-->
+            <section class="center-content">
+              <!--Рабочая область-->
+              <section class="workspace">
+                <h1 class="titles">Генератор водяных знаков</h1>
+                <div class="workspace-inner">
+                  <!--область для загрузки каринки, видима при загрузке картинки-->
+                  <div class="workspase__uploud-image">
+                    <!--область для водяного знака, видима уже при его загрузке-->
+                    <div class="workspase_wotermark-wrap">
+                      <div class="workspase__wotermark"></div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!--Панель управления-->
+              <aside class="controllers">
+                <h2 class="titles">Настройки</h2>
+                <form class="controllers-form">
+                  <!--Раздел загрузки файлов-->
+                  <div class="uploud">
+                    <div class="uploud__image-wrap">
+                      <div class="uploud__image">
+                        <label class="uploud__image-label">Исходное изображение</label>
+                        <div class="uploud__image-inputs-wrap">
+                          <input type="text" placeholder="загрузите изображение" class="uploud__image-input">
+                          <input type="file" class="uploud__image-input">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="uploud__imgae-wrap">
+                      <div class="uploud__image">
+                        <label class="uploud__image-label">Водяной знак</label>
+                        <div class="uploud__image-inputs-wrap">
+                          <input type="text" placeholder="Загрузите водяной знак" class="uploud__image-input">
+                          <input type="file" class="uploud__image-input">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Раздел положение wotermark-->
+                  <div class="position">
+                    <label class="position-label">Положение</label>
+                    <!--Кнопки преключения режима нормальный/замостить-->
+                    <div class="position__type-button-wrap"></div>
+                    <button class="position__type-button position__type-button_normal"></button>
+                    <button class="position__type-button position__type-button_tile"></button>
+                    <!--Окно визаульного позиционирования. Открыто для наполнения. то, котрое видимо-->
+                    <div class="position__vizual-wrap position__vizual-wrap_active">
+                      <!--сетка режима "нормально"-->
+                      <div class="position_vizual">
+                        <div id="normal" class="grid">
+                          <div class="top-row">
+                            <div class="left"></div>
+                            <div class="center"></div>
+                            <div class="right"></div>
+                          </div>
+                          <div class="middle-row">
+                            <div class="left"></div>
+                            <div class="center"></div>
+                            <div class="right"></div>
+                          </div>
+                          <div class="bottm-row">
+                            <div class="left"></div>
+                            <div class="center"></div>
+                            <div class="right"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Окно визаульного позиционирования. Открыто для наполнения. то, котрое не видимо-->
+                    <div class="position__vizual-wrap">
+                      <!--Сетка режима "замостить"-->
+                      <div class="position_vizual">
+                        <div id="tile" class="grid">
+                          <div class="top-row">
+                            <div class="left"></div>
+                            <div class="center"></div>
+                            <div class="right"></div>
+                          </div>
+                          <div class="middle-row">
+                            <div class="left"></div>
+                            <div class="center"></div>
+                            <div class="right"></div>
+                          </div>
+                          <div class="bottm-row">
+                            <div class="left"></div>
+                            <div class="center"></div>
+                            <div class="right"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Кнопки управления-->
+                    <div class="position__controller-wrap">
+                      <div class="position__controller_X">
+                        <input type="text" placeholder="--" class="position__controller_X-input"><a href="#" class="position__controller_X-up"></a><a href="#" class="position_controller_X-down"></a>
+                      </div>
+                      <div class="position__controller_Y">
+                        <input type="text" placeholder="--" class="position__controller_Y-input"><a href="#" class="position__controller_Y-up"></a><a href="#" class="position_controller_Y-down"></a>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Раздел с прозрачностью-->
+                  <div class="opacity">
+                    <label class="opasity__label">Прозрачность</label>
+                    <div class="opasity__slider-wrap">
+                      <div class="opasity-slider">
+                        <input type="range">
+                      </div>
+                    </div>
+                  </div>
+                  <!--Раздел с кнопками-->
+                  <div class="buttons">
+                    <div class="buttons-wrap">
+                      <button type="reset" value="очистить"></button>
+                      <button type="submit" value="скачать"></button>
+                    </div>
+                  </div>
+                </form>
+              </aside>
+            </section>
+            <footer class="page-footer">
+              <p class="page-footer-copyright">(с)2015, Это наш сайт, пожалуйста, не воруйте и не копируйте его</p>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </body>
+  </head>
+</html>

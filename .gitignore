@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 app/bower
 node_modules
 psd
@@ -5,3 +6,8 @@ dist
 app/*.html
 app/css/main.css
 .idea
+=======
+node_modules/
+app/bower
+
+>>>>>>> 383e8b53a9447e78860d240d55afd6c8f8bd7bfd
