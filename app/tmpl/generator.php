@@ -60,12 +60,16 @@
         </div>
       </div>
     </div>
-    <!--Раздел с прозрачностью-->
+    <!--Раздел с прозрачностью 
+    <input type="range" min="0" max="1" step="0.05" value="1" id="slider"  />-->
     <div class="opacity block">
       <label class="opasity__label">Прозрачность</label>
+
       <div class="opasity__slider-wrap">
         <div class="opasity-slider">
-          <input type="range" min="0" max="1" step="0.05" value="1"/>
+          <div type="range" id="slider" style="width:250px"></div>
+          
+
         </div>
       </div>
     </div>
