@@ -60,6 +60,6 @@ $labels = $lang_config[$lang];
 </head>
 
 <body>
-<!--[if lt IE 7]>
+<!--[if lt IE 10]>
   <p class="browsehappy">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="http://browsehappy.com/">обновите</a> его.</p>
 <![endif]-->

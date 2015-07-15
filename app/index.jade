@@ -1,0 +1,115 @@
+doctype html
+html(lang="ru-Ru")
+	head
+		title watermark service
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(name="viewport",content="width=device-width, initial-scale=1.0")
+		//seo
+		meta(name="description",content="сервис по изготовлению водяных знаков")
+		meta(name="author",content="Квашук Андрей, Ильина Лада, Заславская Анастасия, Минка Дмитирий")
+		meta(name="keywords",content="watermark")
+		//favicon
+		link(rel="shortcut icon", href="favicon.ico", type="image/x-icon")
+		link(rel="icon", href="favicon.ico", type="image/x-icon")
+		//css
+		link(rel="stylesheet", type="text/css", href="bower/normalize.css/normalize.css")
+		//js
+		body
+			div.wrapper
+				div.all-content
+					div.container
+						//Основной контент
+						section.center-content
+							//Рабочая область
+							section.workspace
+								h1.titles Генератор водяных знаков
+								div.workspace-inner
+									//область для загрузки каринки, видима при загрузке картинки
+									div.workspase__uploud-image
+										//область для водяного знака, видима уже при его загрузке
+										div.workspase_wotermark-wrap
+											div.workspase__wotermark
+							//Панель управления
+							aside.controllers
+								h2.titles Настройки
+								form.controllers-form
+									//Раздел загрузки файлов
+									div.uploud
+										div.uploud__image-wrap
+											div.uploud__image
+												label.uploud__image-label Исходное изображение
+												div.uploud__image-inputs-wrap
+													input.uploud__image-input(type="text",placeholder="загрузите изображение")
+													input.uploud__image-input(type="file")
+										div.uploud__imgae-wrap
+											div.uploud__image
+												label.uploud__image-label Водяной знак
+												div.uploud__image-inputs-wrap
+													input.uploud__image-input(type="text",placeholder="Загрузите водяной знак")
+													input.uploud__image-input(type="file")
+									//Раздел положение wotermark
+									div.position
+										label.position-label Положение
+										//Кнопки преключения режима нормальный/замостить
+										div.position__type-button-wrap
+										button.position__type-button.position__type-button_normal
+										button.position__type-button.position__type-button_tile
+										//Окно визаульного позиционирования. Открыто для наполнения. то, котрое видимо
+										div.position__vizual-wrap.position__vizual-wrap_active
+											//сетка режима "нормально"
+											div.position_vizual
+												div.grid#normal
+													div.top-row
+														div.left
+														div.center
+														div.right
+													div.middle-row
+														div.left
+														div.center
+														div.right
+													div.bottm-row
+														div.left
+														div.center
+														div.right
+										//Окно визаульного позиционирования. Открыто для наполнения. то, котрое не видимо
+										div.position__vizual-wrap
+											//Сетка режима "замостить"
+											div.position_vizual
+												div.grid#tile
+													div.top-row
+														div.left
+														div.center
+														div.right
+													div.middle-row
+														div.left
+														div.center
+														div.right
+													div.bottm-row
+														div.left
+														div.center
+														div.right
+										//Кнопки управления
+										div.position__controller-wrap
+											div.position__controller_X
+												input.position__controller_X-input(type="text",placeholder="--")
+												a.position__controller_X-up(href="#")
+												a.position_controller_X-down(href="#")
+											div.position__controller_Y
+												input.position__controller_Y-input(type="text",placeholder="--")
+												a.position__controller_Y-up(href="#")
+												a.position_controller_Y-down(href="#")
+									//Раздел с прозрачностью
+									div.opacity
+										label.opasity__label Прозрачность
+										div.opasity__slider-wrap
+											div.opasity-slider
+												input(type="range")
+									//Раздел с кнопками
+									div.buttons
+										div.buttons-wrap
+											button(type="reset",value="очистить")
+											button(type="submit",value="скачать")
+						footer.page-footer
+							p.page-footer-copyright (с)2015, Это наш сайт, пожалуйста, не воруйте и не копируйте его
+										
