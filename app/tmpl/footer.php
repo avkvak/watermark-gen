@@ -6,6 +6,8 @@
 
 <!-- build:js js/main.js -->
 <script src="js/main.js"></script>
+<script src="js/position.js"></script>
+
 <!-- endbuild -->
 <script src="bower/jquery-ui/jquery-ui.min.js"></script>
 <script src="js/opacity-bottom.js"></script>

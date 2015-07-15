@@ -1,0 +1,26 @@
+.position__controller_X-description,
+.position__controller_Y-description {
+	display: inline-block;
+	width: 25px;
+	text-align: center;
+}
+
+.position__controller-wrap {
+	width: 44%!important;
+}
+
+.tile {
+	.grid {
+    cursor: default!important;
+	    .top-row,
+	    .middle-row,
+	    .bottom-row {
+	    	.left, .center, .right {
+	    		background-color: #dbe1e8;
+	    		&:hover, &-active {
+	    			background-color: #dbe1e8!important;
+	    		}
+	    	}
+		}
+	}
+}
