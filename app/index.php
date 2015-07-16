@@ -5,7 +5,7 @@ include "tmpl/header.php";
 
 <main class="wrapper">
   <div class="container clearfix">
-    <!--Основной контент-->
+    <!-- Основной контент-->
     <section class="center-content clearfix">
       <!--Рабочая область-->
       <section class="workspace">
