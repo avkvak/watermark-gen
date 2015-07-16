@@ -4,4 +4,5 @@ psd
 dist
 app/*.html
 app/css/main.css
+app/uploads/files
 .idea

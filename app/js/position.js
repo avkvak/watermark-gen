@@ -45,8 +45,6 @@ var PosMode = (function () {
 }());
 
 
-
-
 $(document).ready(function() {
 	PosMode.init();
 });

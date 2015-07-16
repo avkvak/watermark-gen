@@ -9,7 +9,7 @@
           <input type="text" name="image" id="input-image" value="Загрузите изображение" disabled="disabled" class="input"/><span class="upload-img"></span>
         </label>
         <label for="input-upload-img"></label>
-        <input type="file" name="upload-img" id="input-upload-img" onchange="readURL(this);" class="upload-btn"/>
+        <input id="input-upload-img" class="upload-btn" type="file" name="files" multiple>
       </div>
       <div class="input-form">
         <div class="title-label">Водяной знак</div>
@@ -17,7 +17,7 @@
           <input type="text" name="watermark" id="input-watermark" value="Загрузите водяной знак" disabled="disabled" class="input"/><span class="upload-img"></span>
         </label>
         <label for="input-upload-watermark"></label>
-        <input type="file" name="upload-watermark" id="input-upload-watermark" onchange="readURL2(this);" class="upload-btn"/>
+        <input type="file" name="files" id="input-upload-watermark" class="upload-btn"/>
       </div>
     </div>
     <!--Раздел положение wotermark-->
