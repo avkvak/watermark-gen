@@ -13,14 +13,17 @@ include "tmpl/header.php";
 
         <div class="workspace-inner clearfix">
           <div class="workspase__uploud-image">
+
             <!--область для загрузки каринки, видима при загрузке картинки-->
             <div class="workspase__wotermark workspase__wotermark-image">
               <img id="blah" src="#" alt="your image" />
               <!--область для водяного знака, видима уже при его загрузке-->
               <div class="workspase_wotermark-wrap">
-                <div class="workspase__wotermark workspase__wotermark-watermark"><img id="blah2" src="#" alt="your watermark" /></div>
+                <div class="workspase__wotermark workspase__wotermark-watermark" id="watermark-opacity"><img id="blah2" src="#" alt="your watermark" /></div>
               </div>
+
             </div>
+
           </div>
         </div>
       </section>

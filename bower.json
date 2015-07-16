@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "watermark",
   "version": "0.0.0",
   "homepage": "https://github.com/avkvak/watermark-gen",
@@ -12,4 +13,21 @@
     "normalize-css": "~3.0.3",
     "jquery-file-upload": "~9.8.0"
   }
+=======
+  "name": "hw3asya",
+  "version": "0.0.0",
+  "homepage": "https://github.com/avkvak/watermark-gen",
+  "authors": [
+    "Anastasiya Zaslavskaya <zaslavskayasya@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower",
+    "test",
+    "tests"
+  ]
+>>>>>>> 383e8b53a9447e78860d240d55afd6c8f8bd7bfd
 }
