@@ -1,0 +1,8 @@
+{
+  "require": {
+    "phpmailer/phpmailer": "dev-master"
+  },
+  "config": {
+    "vendor-dir": "app/libs"
+  }
+}

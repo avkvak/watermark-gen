@@ -1,0 +1,8 @@
+app/bower
+node_modules
+psd
+dist
+app/*.html
+app/css/main.css
+.idea
+gulpfile.js

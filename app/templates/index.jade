@@ -1,0 +1,141 @@
+doctype html
+html(lang="ru-Ru")
+	head
+		title watermark service
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(name="viewport",content="width=device-width, initial-scale=1.0")
+		//seo
+		meta(name="description",content="сервис по изготовлению водяных знаков")
+		meta(name="author",content="Квашук Андрей, Ильина Лада, Заславская Анастасия, Минка Дмитирий")
+		meta(name="keywords",content="watermark")
+		//favicon
+		link(rel="shortcut icon", href="favicon.ico", type="image/x-icon")
+		link(rel="icon", href="favicon.ico", type="image/x-icon")
+
+		<!-- build:css css/vendor.min.css -->
+		// bower:css
+		// endbower
+		<!-- endbuild -->
+
+		//html5 for ie8
+		<!--[if lt IE 9]>
+		script(src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js")
+		script(src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js")
+		<![endif]-->
+		
+		<!-- build:css css/main.min.css -->
+		link(rel="stylesheet", href="css/main.css")
+		<!-- endbuild -->
+
+		body
+			main.wrapper
+					div.container.clearfix
+						//Основной контент
+						section.center-content.clearfix
+							//Рабочая область
+							section.workspace
+								h1.workspace-title Генератор водяных знаков
+								div.workspace-inner.clearfix
+									//область для загрузки каринки, видима при загрузке картинки
+									div.workspase__uploud-image
+										//область для водяного знака, видима уже при его загрузке
+										div.workspase_wotermark-wrap
+											div.workspase__wotermark
+							//Панель управления
+							aside.controllers
+								h2.controllers-title Настройки
+								form.controllers-form
+									//Раздел загрузки файлов
+									div.uploud
+										div.input-form
+											div.title-label Исходное изображение
+											label.input-label(for="input-image")
+												input.input(type="text", name="image", id="input-image" placeholder="Загрузите изображение")
+												span.upload-img
+											label(for="input-upload-img")
+											input.upload-btn(type="file",name="upload-img",id="input-upload-img")
+										div.input-form
+											div.title-label Водяной знак
+											label.input-label(for="input-watermark")
+												input.input(type="text", name="watermark", id="input-watermark" placeholder="Загрузите водяной знак")
+												span.upload-img
+											label(for="input-upload-watermark")
+											input.upload-btn(type="file",name="upload-watermark",id="input-upload-watermark")
+									//Раздел положение wotermark
+									div.position
+										div.position-row.clearfix
+											label.position-label Положение
+											//Кнопки преключения режима нормальный/замостить
+											div.position__type-button-wrap.clearfix
+												button.position__type-button.position__type-button_normal
+												button.position__type-button.position__type-button_tile
+										div.position-row-2.clearfix
+											//Окно визаульного позиционирования. Открыто для наполнения. то, котрое видимо
+											div.position__vizual-wrap
+												//сетка режима "нормально"
+												div.position_vizual
+													div.grid#normal
+														div.top-row
+															div.left
+															div.center
+															div.right
+														div.middle-row
+															div.left
+															div.center
+															div.right
+														div.bottm-row
+															div.left
+															div.center
+															div.right
+											//Окно визаульного позиционирования. Открыто для наполнения. то, котрое не видимо
+											div.position__vizual-wrap.position__vizual-wrap--hiden
+												//Сетка режима "замостить"
+												div.position_vizual
+													div.grid#tile
+														div.top-row
+															div.left
+															div.center
+															div.right
+														div.middle-row
+															div.left
+															div.center
+															div.right
+														div.bottm-row
+															div.left
+															div.center
+															div.right
+											//Кнопки управления
+											div.position__controller-wrap
+												div.position__controller_X
+													input.position__controller_X-input(type="text",placeholder="--")
+													a.position__controller_X-up(href="#")
+													a.position_controller_X-down(href="#")
+												div.position__controller_Y
+													input.position__controller_Y-input(type="text",placeholder="--")
+													a.position__controller_Y-up(href="#")
+													a.position_controller_Y-down(href="#")
+									//Раздел с прозрачностью
+									div.opacity
+										label.opasity__label Прозрачность
+										div.opasity__slider-wrap
+											div.opasity-slider
+												input(type="range")
+									//Раздел с кнопками
+									div.buttons
+										div.buttons-wrap
+											button.btn.btn-res(type="reset",value="Сброс") Сброс
+											button.btn(type="submit",value="скачать") Скачать
+			footer.page-footer
+				div.page-footer-copyright (с)2015, Это наш сайт, пожалуйста, не воруйте и не копируйте его
+		
+
+
+
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
+		script(src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js")
+
+		<!-- build:js js/main.js --> 
+		script(src="js/main.js")
+		<!-- endbuild -->
+		script(src="js/drag.js")
