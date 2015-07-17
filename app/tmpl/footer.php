@@ -6,6 +6,7 @@
 <!-- build:js js/main.js -->
 <script src="js/main.js"></script>
 <!-- endbuild -->
-
+<script src="js/opacity.js"></script>
+<script src="js/reset.js"></script>
 </body>
 </html>
