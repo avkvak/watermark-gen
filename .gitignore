@@ -1,4 +1,5 @@
 app/bower
+app/libs
 node_modules
 psd
 dist
