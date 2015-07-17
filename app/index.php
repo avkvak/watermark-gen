@@ -5,7 +5,7 @@ include "tmpl/header.php";
 
 <main class="wrapper">
   <div class="container clearfix">
-    <!-- Основной контент-->
+    <!-- Основной контент -->
     <section class="center-content clearfix">
       <!--Рабочая область-->
       <section class="workspace">
@@ -13,6 +13,7 @@ include "tmpl/header.php";
 
         <div class="workspace-inner clearfix">
           <div class="workspase__uploud-image">
+
             <!--область для загрузки каринки, видима при загрузке картинки-->
             <div class="workspase__wotermark workspase__wotermark-image">
               <img id="blah" src="#" alt="your image" />
@@ -20,7 +21,9 @@ include "tmpl/header.php";
               <div class="workspase_wotermark-wrap">
                 <div class="workspase__wotermark workspase__wotermark-watermark" ><img id="blah2" src="#" alt="your watermark" /></div>
               </div>
+
             </div>
+
           </div>
         </div>
       </section>
