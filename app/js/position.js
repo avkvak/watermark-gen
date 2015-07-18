@@ -251,7 +251,9 @@ var NormalMode = (function () {
 
 
 var TileMode = (function () {
-	var mt, mr; 
+	var mt, mr;
+
+	var globCols; 
 
 	var
 		grid = $('#grid'),
@@ -285,7 +287,6 @@ var TileMode = (function () {
 		grid.append(gridMrMarkup); 
 		//Создали динамически все что нужно
 
-
 		xInput.hide();
 		yInput.hide(); //Приячем Инпуты Х У
 
@@ -308,11 +309,12 @@ var TileMode = (function () {
 		var 
 			cols = Math.ceil(+imageWidth / +watermarkWidth),
 			rows = Math.ceil(+imageHeight / +watermarkHeight),
-			clonesToAddCount = (cols+3)*(rows+3);
+			clonesToAddCount = (cols+4)*(rows+4);
+		
+		globCols = cols+4;
 
 		watermark.css({
-			'height' : watermarkWidth*(rows+3),
-			'width' :  watermarkWidth*(cols+3),
+			'min-width' :  imageWidth+watermarkWidth*5,
 			'margin-top' : -(watermarkHeight*2),
 			'margin-left' : -(watermarkWidth*2),
 			'left' : 0,
@@ -344,6 +346,13 @@ var TileMode = (function () {
 		watermark.css(revMargin, (+watermarkMargin - +input.val()*2) + 'px');
 		grid.css(gridParam, input.val() + 'px');
 		grid.css(revMargin, -(input.val()/2) + 'px');
+
+		if (gridParam = 'width') {
+			var newWidth = globCols*(+watermarks.css('width').replace('px', '') + +watermarks.css('margin-right').replace('px', ''));
+			console.log(+watermark.css('width').replace('px', ''));
+			console.log(+watermark.css('margin-right').replace('px', ''));
+			watermark.css(gridParam, newWidth);
+		}
 	}
 
 
@@ -368,6 +377,11 @@ var TileMode = (function () {
 		grid.css(gridParam, operators[operator](current, step) + 'px');
 		grid.css(revMargin, (operators[revOperator](-current, step))/2 + 'px');
 		input.val(operators[operator](current, step));
+
+		if (gridParam = 'width') {
+			var newWidth = globCols*(+watermarks.css('width').replace('px', '') + +watermarks.css('margin-right').replace('px', ''));
+			watermark.css(gridParam, newWidth);
+		}
 	}
 
 	function _marginItFromArrows(event) {
@@ -390,7 +404,6 @@ var TileMode = (function () {
 		if (className.indexOf('up') + 1) {
 			
 			if (className.indexOf('position__controller_X') + 1) {
-				console.log(currentMbInt)
 				_marginItArr ('margin-bottom', 'margin-top', currentMbInt, '+', '-', mb, gridMb, 'height', mt, 3);
 				//Кнопка увеличить margin bottom
 			} else if (className.indexOf('position__controller_Y') + 1) {
@@ -406,10 +419,10 @@ var TileMode = (function () {
 				//Кнопка уменьшить margin right
 			}
 		}
+	}
 
-		function _chkMinMaxVal () {
-			
-		}
+	function _chkMinMaxVal () {
+				
 	}
 
 
@@ -425,7 +438,6 @@ var TileMode = (function () {
 			arrows.off('click'); // Убиваем события кнопок. Другой режим - другие события
 			buttons.removeClass('active'); //и убираем подсветку кнопки
 			_showHideBlocks();
-			
 			
 		}
 	}
