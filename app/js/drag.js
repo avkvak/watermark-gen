@@ -4,8 +4,11 @@ $(document).ready(function() {
 
 	if (!pos.hasClass('tile')){
 		wm.draggable({containment: ".workspase__wotermark-image", cursor: "move"});
+		console.log(1);
 	} else {
 		wm.draggable({cursor: "move"});
+
+		console.log(2);
 	};
 
 	wm.on('drag',function(){

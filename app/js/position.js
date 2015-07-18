@@ -53,6 +53,7 @@ var NormalMode = (function () {
 		buttons = grid.children().children(),
 		image = $('.workspase__wotermark-image'),
 		watermark = $('.workspase_wotermark-wrap'),
+		watermarks = $('.workspase__wotermark-watermark'),
 		xInput = $('.position__controller_X-input'),
 		yInput = $('.position__controller_Y-input'),
 		arrows = $('.position').find('a:not(.position__type-button)');
@@ -184,8 +185,6 @@ var NormalMode = (function () {
 				xInput = $('.position__controller_X-input'),
 				yInput = $('.position__controller_Y-input'),
 				step = 10;
-				console.log(currentPosXint);
-
 
 			if (className.indexOf('up') + 1) {
 
@@ -241,6 +240,10 @@ var NormalMode = (function () {
 					'margin-left' : 0
 				})
 
+				watermarks.css({
+					'margin': 0
+				})
+
 			}
 		}
 })();
@@ -257,15 +260,13 @@ var TileMode = (function () {
 		watermark = $('.workspase_wotermark-wrap'),
 		xInput = $('.position__controller_X-input'),
 		yInput = $('.position__controller_Y-input'),
-		arrows = $('.position').find('a:not(.position__type-button)');
-
-	var 
-		inputMb, inputMr, gridMb, gridMr;
+		arrows = $('.position').find('a:not(.position__type-button)'),
+		watermarks;
 
 	function _setUpListeners () {
 		$('#mb').on('change', _marginBottomIt);
 		$('#mr').on('change', _marginRightIt);
-		//arrows.on('click', _positionItFromArrows);
+		arrows.on('click', _marginItFromArrows);
 	}
 
 	function _showHideBlocks () {
@@ -277,11 +278,11 @@ var TileMode = (function () {
 
 		$('.dynamic').detach();
 
-		inputMb = xInput.after(inputMbMarkup);
-		inputMr = yInput.after(inputMrMarkup);
+		xInput.after(inputMbMarkup);
+		yInput.after(inputMrMarkup);
 
-		gridMb = grid.append(gridMbMarkup);
-		gridMr = grid.append(gridMrMarkup); 
+		grid.append(gridMbMarkup);
+		grid.append(gridMrMarkup); 
 		//Создали динамически все что нужно
 
 
@@ -307,13 +308,13 @@ var TileMode = (function () {
 		var 
 			cols = Math.ceil(+imageWidth / +watermarkWidth),
 			rows = Math.ceil(+imageHeight / +watermarkHeight),
-			clonesToAddCount = (cols+2)*(rows+2);
+			clonesToAddCount = (cols+3)*(rows+3);
 
 		watermark.css({
-			'height' : watermarkWidth*(rows+2)+150,
-			'width' :  watermarkWidth*(cols+2)+150,
-			'margin-top' : -(watermarkHeight),
-			'margin-left' : -(watermarkWidth),
+			'height' : watermarkWidth*(rows+3),
+			'width' :  watermarkWidth*(cols+3),
+			'margin-top' : -(watermarkHeight*2),
+			'margin-left' : -(watermarkWidth*2),
 			'left' : 0,
 			'top' : 0,
 		});
@@ -333,36 +334,84 @@ var TileMode = (function () {
 
 		console.log('Произведено ' + (+clonesToAddCount+1)  + ' клонирований(я) вотермарка для замощения');
 
+		watermarks = $('.workspase__wotermark-watermark');
+
 		_setUpListeners();
 	}
 
+	function _marginIt (marginStyle, revMargin, input, grid, gridParam, watermarkMargin) {
+		watermarks.css(marginStyle, input.val() + 'px');
+		watermark.css(revMargin, (+watermarkMargin - +input.val()*2) + 'px');
+		grid.css(gridParam, input.val() + 'px');
+		grid.css(revMargin, -(input.val()/2) + 'px');
+	}
+
+
 	function _marginBottomIt (event) {
-		var 
-			$this = $(this),
-			watermarks = $('.workspase__wotermark-watermark');
-
-		watermarks.css({
-			'margin-bottom' : $this.val() + 'px'
-		})
-
-		watermark.css({
-			'margin-top' : (mt - $this.val()) + 'px' 
-		})
+		_chkMinMaxVal();
+		_marginIt( 'margin-bottom', 'margin-top', $(this), $('#gridMb'), 'height', mt);
 	}	
 
 	function _marginRightIt (event) {
-		var 
-			$this = $(this),
-			watermarks = $('.workspase__wotermark-watermark');
-
-		watermarks.css({
-			'margin-right' : $this.val() + 'px'
-		})
-
-		watermark.css({
-			'margin-left' : (ml - $this.val()) + 'px'
-		})
+		_chkMinMaxVal();
+		_marginIt( 'margin-right', 'margin-left', $(this), $('#gridMr'), 'width', ml);
 	}
+
+	function _marginItArr (marginStyle, revMargin, current, operator, revOperator, input, grid, gridParam, watermarkMargin, step) {
+		var operators = {
+		    '+': function(a, b) { return a + b },
+		    '-': function(a, b) { return a - b },
+		};
+
+		watermarks.css(marginStyle, operators[operator](current, step) + 'px');
+		watermark.css(revMargin, (watermarkMargin - operators[operator](current*2, +step*2))+ 'px');
+		grid.css(gridParam, operators[operator](current, step) + 'px');
+		grid.css(revMargin, (operators[revOperator](-current, step))/2 + 'px');
+		input.val(operators[operator](current, step));
+	}
+
+	function _marginItFromArrows(event) {
+		event.preventDefault();
+
+
+		var
+			$this = $(this),
+			className = event.target.className.split(' ')[0],
+			currentMb = watermarks.css('margin-bottom'),
+			currentMbInt = parseInt(currentMb, 10),
+			currentMr = watermarks.css('margin-right'),
+			currentMrInt = parseInt(currentMr, 10),
+			mb = $('#mb'),
+			mr = $('#mr');
+		var 
+			gridMb = $('#gridMb'),
+			gridMr = $('#gridMr');
+
+		if (className.indexOf('up') + 1) {
+			
+			if (className.indexOf('position__controller_X') + 1) {
+				console.log(currentMbInt)
+				_marginItArr ('margin-bottom', 'margin-top', currentMbInt, '+', '-', mb, gridMb, 'height', mt, 3);
+				//Кнопка увеличить margin bottom
+			} else if (className.indexOf('position__controller_Y') + 1) {
+				_marginItArr ('margin-right', 'margin-left', currentMrInt, '+', '-', mr, gridMr, 'width', ml, 3);
+				//Кнопка увеличить margin right
+			}
+		} else if (className.indexOf('down') + 1) {
+			if (className.indexOf('position__controller_X') + 1) {
+				_marginItArr ('margin-bottom', 'margin-top', currentMbInt, '-', '+', mb, gridMb, 'height', mt, 3);
+				//Кнопка уменьшить margin bottom
+			} else if (className.indexOf('position__controller_Y') + 1) {
+				_marginItArr ('margin-right', 'margin-left', currentMrInt, '-', '+', mr, gridMr, 'width', ml, 3);
+				//Кнопка уменьшить margin right
+			}
+		}
+
+		function _chkMinMaxVal () {
+			
+		}
+	}
+
 
 
 	return {
