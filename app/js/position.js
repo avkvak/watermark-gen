@@ -382,9 +382,6 @@ var TileMode = (function () {
 	}
 })();
 
-
-
-
 $(document).ready(function() {
 	PosMode.init();
 });
