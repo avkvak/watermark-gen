@@ -24,6 +24,7 @@ var PosMode = (function () {
 		NormalMode.init();
 		buttons.removeClass('active');
 		buttons.first().addClass('active');
+		dragNDrop(); //Перезапускаем драгндроп
 		return false;
 	} // Тут описываем все действия по переходу в нормальный режим и запускаем функцию нормального режима
 
@@ -34,6 +35,7 @@ var PosMode = (function () {
 		contY.text('↔').css('font-family', 'colibri');
 		block.addClass('tile');
 		TileMode.init();
+		dragNDrop(); //Перезапускаем драгндроп
 		return false;
 	} // Тут описываем все действия по переходу в режим замостить и запускаем функцию режима.
 
