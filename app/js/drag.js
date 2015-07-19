@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function dragNDrop () {
 	var wm = $('.workspase_wotermark-wrap'),
 		pos = $('.position');
 
@@ -6,7 +6,7 @@ $(document).ready(function() {
 		wm.draggable({containment: ".workspase__wotermark-image", cursor: "move"});
 		console.log(1);
 	} else {
-		wm.draggable({cursor: "move"});
+		wm.draggable({containment: false ,cursor: "move"});
 
 		console.log(2);
 	};
@@ -23,4 +23,4 @@ $(document).ready(function() {
 		inputY.val(currentYInt);
 	});
 
-});
+};
