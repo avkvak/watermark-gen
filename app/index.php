@@ -15,11 +15,11 @@ include "tmpl/header.php";
           <div class="workspase__uploud-image">
             <!--область для загрузки каринки, видима при загрузке картинки-->
             <div class="workspase__wotermark workspase__wotermark-image">
-              <img id="watermark__src-image" src="#" alt="your image" />
+              <img id="watermark__src-image" src="img/image.jpg" alt="your image" />
               <!--область для водяного знака, видима уже при его загрузке-->
               <div class="workspase_wotermark-wrap">
                 <div class="workspase__wotermark workspase__wotermark-watermark">
-                  <img id="watermark__src-logo" src="#" alt="your watermark" />
+                  <img id="watermark__src-logo" src="img/watermark.png" alt="your watermark" />
                 </div>
               </div>
             </div>

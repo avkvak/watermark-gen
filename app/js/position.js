@@ -7,7 +7,8 @@ var PosMode = (function () {
 		tileActive = 'position__type-button_tile-active',
 		contX = $('.position__controller_X-description'),
 		contY = $('.position__controller_Y-description'),
-		block = $('.position');
+		block = $('.position'),
+		buttons = $('#grid').children().children();
 
 	function _setUpListeners () {
 		normal.on('click', _goToNormal);
@@ -21,6 +22,8 @@ var PosMode = (function () {
 		contY.text('Y').css('font-family', 'Roboto-Light');
 		block.removeClass('tile');
 		NormalMode.init();
+		buttons.removeClass('active');
+		buttons.first().addClass('active');
 		return false;
 	} // Тут описываем все действия по переходу в нормальный режим и запускаем функцию нормального режима
 
@@ -228,6 +231,11 @@ var NormalMode = (function () {
 
 			init: function() {
 				console.log('Обычный режим позиционирования инициирован');
+				var defaultMarkup = '<div class="workspase__wotermark workspase__wotermark-watermark"><img id="watermark__src-logo" src="#" alt="your watermark" /></div>',
+					defaultSource = $('#watermark__src-logo').attr('src');
+
+				arrows.off('click');
+
 				_setUpListeners();
 				xInput.show();
 				yInput.show(); //Показываем инпуты X Y
@@ -237,12 +245,19 @@ var NormalMode = (function () {
 					'height' : 'auto',
 					'width' : 'auto',
 					'margin-top' : 0,
-					'margin-left' : 0
+					'margin-left' : 0,
+					'left' : 0,
+					'top' : 0
 				})
 
 				watermarks.css({
 					'margin': 0
 				})
+
+				watermark.html(defaultMarkup);
+				$('#watermark__src-logo').attr('src', defaultSource);
+
+				xInput.val(0); yInput.val(0);
 
 			}
 		}
@@ -266,8 +281,8 @@ var TileMode = (function () {
 		watermarks;
 
 	function _setUpListeners () {
-		$('#mb').on('change', _marginBottomIt);
-		$('#mr').on('change', _marginRightIt);
+		$('#mb').on('change keyup', _marginBottomIt);
+		$('#mr').on('change keyup', _marginRightIt);
 		arrows.on('click', _marginItFromArrows);
 	}
 
@@ -295,6 +310,7 @@ var TileMode = (function () {
 
 
 	function _tileIt () {
+		
 		var 
 			clone = watermark.html();
 			
@@ -314,7 +330,7 @@ var TileMode = (function () {
 		globCols = cols+4;
 
 		watermark.css({
-			'min-width' :  imageWidth+watermarkWidth*5,
+			'width' :  imageWidth+watermarkWidth*5,
 			'margin-top' : -(watermarkHeight*2),
 			'margin-left' : -(watermarkWidth*2),
 			'left' : 0,
@@ -328,7 +344,6 @@ var TileMode = (function () {
 			watermark.append(clone);
 			if (i>400) break;
 		};
-
 
 		$.each($('.workspase__wotermark-watermark:not(:first)'), function(index, val) {
 			 $(this).addClass('dynamic');
@@ -344,29 +359,31 @@ var TileMode = (function () {
 	function _marginIt (marginStyle, revMargin, input, grid, gridParam, watermarkMargin) {
 		watermarks.css(marginStyle, input.val() + 'px');
 		watermark.css(revMargin, (+watermarkMargin - +input.val()*2) + 'px');
-		grid.css(gridParam, input.val() + 'px');
-		grid.css(revMargin, -(input.val()/2) + 'px');
+		grid.css(gridParam, (input.val())/2 + 'px');
+		grid.css(revMargin, -(input.val()/4) + 'px');
 
 		if (gridParam = 'width') {
 			var newWidth = globCols*(+watermarks.css('width').replace('px', '') + +watermarks.css('margin-right').replace('px', ''));
-			console.log(+watermark.css('width').replace('px', ''));
-			console.log(+watermark.css('margin-right').replace('px', ''));
+
 			watermark.css(gridParam, newWidth);
 		}
 	}
 
 
 	function _marginBottomIt (event) {
-		_chkMinMaxVal();
+		_letterCheck($(this));
+		_minMaxCheck($(this));
 		_marginIt( 'margin-bottom', 'margin-top', $(this), $('#gridMb'), 'height', mt);
 	}	
 
 	function _marginRightIt (event) {
-		_chkMinMaxVal();
+		_letterCheck($(this));
+		_minMaxCheck($(this));
 		_marginIt( 'margin-right', 'margin-left', $(this), $('#gridMr'), 'width', ml);
 	}
 
 	function _marginItArr (marginStyle, revMargin, current, operator, revOperator, input, grid, gridParam, watermarkMargin, step) {
+
 		var operators = {
 		    '+': function(a, b) { return a + b },
 		    '-': function(a, b) { return a - b },
@@ -374,8 +391,8 @@ var TileMode = (function () {
 
 		watermarks.css(marginStyle, operators[operator](current, step) + 'px');
 		watermark.css(revMargin, (watermarkMargin - operators[operator](current*2, +step*2))+ 'px');
-		grid.css(gridParam, operators[operator](current, step) + 'px');
-		grid.css(revMargin, (operators[revOperator](-current, step))/2 + 'px');
+		grid.css(gridParam, (operators[operator](current, step))/2 + 'px');
+		grid.css(revMargin, (operators[revOperator](-current, step))/4 + 'px');
 		input.val(operators[operator](current, step));
 
 		if (gridParam = 'width') {
@@ -421,10 +438,34 @@ var TileMode = (function () {
 		}
 	}
 
-	function _chkMinMaxVal () {
-				
-	}
+	function _letterCheck (input) {
+		var 
+			value = input.val(),
+	    	rep = /[-\.;":'a-zA-Zа-яА-Я]/; 
 
+	    if (rep.test(value)) { 
+	        input.val(value.replace(rep, ''));  
+	        input.value = value; 
+	    } 
+	} // Удаляем буквы, которые вводит пользователь
+
+	function _minMaxCheck (input) {
+		var 
+			value = input.val();
+			width = image.outerWidth() - watermarks.outerWidth();
+
+			console.log(width)
+
+		if (value < -20) {
+			input.val(20);
+			console.log('<');
+			return true;
+		} else if (value > width) {
+			input.val(width);
+			return true;
+		}
+	return false;
+	}
 
 
 	return {

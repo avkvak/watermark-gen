@@ -16,8 +16,8 @@ $(document).ready(function() {
 			currentXInt = parseInt(currentX, 10),
 			currentY = wm.css('top'),
 			currentYInt = parseInt(currentY, 10),
-			inputX = $('.position__controller_X-input'),
-			inputY = $('.position__controller_Y-input');
+			inputX = $('.position__controller_X-input:first'),
+			inputY = $('.position__controller_Y-input:first');
 
 		inputX.val(currentXInt);
 		inputY.val(currentYInt);

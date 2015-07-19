@@ -8,6 +8,7 @@ var imgUpload = (function () {
                 $('#watermark__src-image').attr('src', 'uploads/files/' + file.name);
                 $('#input-image').attr('value', file.name);
             });
+            PosMode.init(); // Перекидываем в обычный режим, иначе жесть
         }
     });
     $('#input-upload-watermark').fileupload({
@@ -34,6 +35,7 @@ var imgUpload = (function () {
                 });
 
             });
+            PosMode.init(); // Перекидываем в обычный режим, иначе жесть
         }
     });
 
