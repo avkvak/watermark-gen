@@ -314,7 +314,8 @@ var TileMode = (function () {
 	function _tileIt () {
 		
 		var 
-			clone = watermark.html();
+			clone = watermark.html(),
+			markup = '';
 			
 			console.log(clone.length);
 
@@ -343,8 +344,10 @@ var TileMode = (function () {
 		ml = +watermark.css('margin-left').replace('px','');
 
 		for (var i = 0;  i <= clonesToAddCount; i++) {
-			watermark.append(clone);
+			markup += clone;
 		};
+		watermark.html(markup);
+		markup = '';
 
 		$.each($('.workspase__wotermark-watermark:not(:first)'), function(index, val) {
 			 $(this).addClass('dynamic');
