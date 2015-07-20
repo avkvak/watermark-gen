@@ -337,23 +337,27 @@ var TileMode = (function () {
 			'margin-left' : -(watermarkWidth*2),
 			'left' : 0,
 			'top' : 0,
-		});
+		}); //Сбрасываем и сдвигаем обертку влево-вверх
 
 		mt = +watermark.css('margin-top').replace('px','');
 		ml = +watermark.css('margin-left').replace('px','');
 
 		for (var i = 0;  i <= clonesToAddCount; i++) {
 			watermark.append(clone);
-			if (i>400) break;
 		};
 
 		$.each($('.workspase__wotermark-watermark:not(:first)'), function(index, val) {
 			 $(this).addClass('dynamic');
-		});
+		}); //Динамические элементы метим
 
 		console.log('Произведено ' + (+clonesToAddCount+1)  + ' клонирований(я) вотермарка для замощения');
 
 		watermarks = $('.workspase__wotermark-watermark');
+
+		watermarks.css({
+			'margin-right' : 0,
+			'margin-bottom' : 0
+		})
 
 		_setUpListeners();
 	}
@@ -374,13 +378,11 @@ var TileMode = (function () {
 
 	function _marginBottomIt (event) {
 		_letterCheck($(this));
-		_minMaxCheck($(this));
 		_marginIt( 'margin-bottom', 'margin-top', $(this), $('#gridMb'), 'height', mt);
 	}	
 
 	function _marginRightIt (event) {
 		_letterCheck($(this));
-		_minMaxCheck($(this));
 		_marginIt( 'margin-right', 'margin-left', $(this), $('#gridMr'), 'width', ml);
 	}
 
@@ -390,22 +392,28 @@ var TileMode = (function () {
 		    '+': function(a, b) { return a + b },
 		    '-': function(a, b) { return a - b },
 		};
-
-		watermarks.css(marginStyle, operators[operator](current, step) + 'px');
-		watermark.css(revMargin, (watermarkMargin - operators[operator](current*2, +step*2))+ 'px');
-		grid.css(gridParam, (operators[operator](current, step))/2 + 'px');
-		grid.css(revMargin, (operators[revOperator](-current, step))/4 + 'px');
 		input.val(operators[operator](current, step));
 
-		if (gridParam = 'width') {
-			var newWidth = globCols*(+watermarks.css('width').replace('px', '') + +watermarks.css('margin-right').replace('px', ''));
-			watermark.css(gridParam, newWidth);
+		if (_minMaxCheck(input)) {
+			return false;
+		} else {
+			watermarks.css(marginStyle, operators[operator](current, step) + 'px');
+			watermark.css(revMargin, (watermarkMargin - operators[operator](current*2, +step*2))+ 'px');
+			grid.css(gridParam, (operators[operator](current, step))/2 + 'px');
+			grid.css(revMargin, (operators[revOperator](-current, step))/4 + 'px');
+			
+
+			if (gridParam = 'width') {
+				var newWidth = globCols*(+watermarks.css('width').replace('px', '') + +watermarks.css('margin-right').replace('px', ''));
+				watermark.css(gridParam, newWidth);
+			}
 		}
+
+
 	}
 
 	function _marginItFromArrows(event) {
 		event.preventDefault();
-
 
 		var
 			$this = $(this),
@@ -456,11 +464,8 @@ var TileMode = (function () {
 			value = input.val();
 			width = image.outerWidth() - watermarks.outerWidth();
 
-			console.log(width)
-
-		if (value < -20) {
-			input.val(20);
-			console.log('<');
+		if (value < 0) {
+			input.val(0);
 			return true;
 		} else if (value > width) {
 			input.val(width);
