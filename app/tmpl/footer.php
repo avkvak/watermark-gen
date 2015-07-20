@@ -19,6 +19,7 @@
 <script src="js/reset.js"></script>
 <script src="js/position.js"></script>
 <script src="js/drag.js"></script>
+<script src="js/resize.js"></script>
 <!-- endbuild -->
 
 </body>
