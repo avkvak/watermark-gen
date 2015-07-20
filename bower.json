@@ -10,6 +10,7 @@
     "jquery": "~2.1.4",
     "materialize": "~0.97.0",
     "normalize-css": "~3.0.3",
-    "jquery-file-upload": "~9.8.0"
+    "jquery-file-upload": "~9.8.0",
+    "jquery-file-download": "~1.4.3"
   }
 }

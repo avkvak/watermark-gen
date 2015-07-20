@@ -1,6 +1,7 @@
 <aside class="controllers">
   <h2 class="controllers-title">Настройки</h2>
-  <form action="" method="POST" class="controllers-form">
+    <form action="tmpl/watermark.php" method="post" class="controllers-form" enctype="multipart/form-data">
+    <input type="file" name="org_image" multiple><br>
     <!--Раздел загрузки файлов-->
     <div class="uploud block">
       <div class="input-form">
@@ -74,7 +75,7 @@
     <div class="buttons">
       <div class="buttons-wrap clearfix">
         <button type="reset" value="Сброс" class="btn btn-res" id="btn-reset">Сброс</button>
-        <button type="submit" value="скачать" class="btn">Скачать</button>
+        <button id="buttons-submit" type="submit" value="скачать" class="btn">Скачать</button>
       </div>
     </div>
   </form>
