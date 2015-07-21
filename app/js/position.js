@@ -1,5 +1,5 @@
 var PosMode = (function () {
-	var
+	var 
 		button = $('.position__type-button'),
 		normal = $('.position__type-button_normal'),
 		tile = $('.position__type-button_tile'),
@@ -41,7 +41,7 @@ var PosMode = (function () {
 
 
     return {
-
+	    
 	    init : function() {
 			console.log('PosMode initiated');
 			_setUpListeners();
@@ -73,13 +73,13 @@ var NormalMode = (function () {
 		function _positionItFromGrid (event) {
 			var $this = $(this);
 
-			var
+			var 
 				imageWidth = image.outerWidth(),
 				imageHeight = image.outerHeight(),
 				watermarkWidth = watermark.outerWidth(),
 				watermarkHeight = watermark.outerHeight();
 
-			var
+			var 
 				className = event.target.className.split(' ')[0],
 				parentClassName = $(this).parent('div')[0].className;
 				posLeft = 0, posTop = 0;
@@ -125,9 +125,9 @@ var NormalMode = (function () {
 		function _positionItFromInputX (event) {
 			buttons.removeClass('active');//С сетки скинуть подветку, если заполняются инпуты
 
-			var
+			var 
 				$this = $(this);
-			var
+			var 
 				imageWidth = image.outerWidth(),
 				watermarkWidth = watermark.outerWidth();
 
@@ -145,9 +145,9 @@ var NormalMode = (function () {
 		function _positionItFromInputY (event) {
 			buttons.removeClass('active');//С сетки скинуть подветку, если заполняются инпуты
 
-			var
+			var 
 				$this = $(this);
-			var
+			var 
 				imageHeight = image.outerHeight(),
 				watermarkHeight = watermark.outerHeight();
 
@@ -164,15 +164,15 @@ var NormalMode = (function () {
 		} //Позиционирование по У
 
 		function _letterCheck (input) {
-			var
+			var 
 				value = input.val(),
-		    	rep = /[-\.;":'a-zA-Zа-яА-Я]/;
+		    	rep = /[-\.;":'a-zA-Zа-яА-Я]/; 
 
-		    if (rep.test(value)) {
+		    if (rep.test(value)) { 
 		    	console.log('1')
-		        input.val(value.replace(rep, ''));
-		        input.value = value;
-		    }
+		        input.val(value.replace(rep, ''));  
+		        input.value = value; 
+		    } 
 		} // Удаляем буквы, которые вводит пользователь
 
 		function _positionItFromArrows (event) {
@@ -199,7 +199,7 @@ var NormalMode = (function () {
 					xInput.val(+currentPosXint + step);
 					//Кнопка up x
 				} else if (className.indexOf('position__controller_Y') + 1) {
-
+					
 					watermark.css('top', currentPosYint + step);
 					yInput.val(+currentPosYint + step);
 					//Кнопка up y
@@ -208,12 +208,12 @@ var NormalMode = (function () {
 			} else if (className.indexOf('down') + 1) {
 
 				if (className.indexOf('position__controller_X') + 1) {
-
+					
 					watermark.css('left', currentPosXint - step);
 					xInput.val(+currentPosXint - step);
 					//Кнопка down x
 				} else if (className.indexOf('position__controller_Y') + 1) {
-
+					
 					watermark.css('top', currentPosYint - step);
 					yInput.val(+currentPosYint - step);
 					//Кнопка down y
@@ -270,7 +270,7 @@ var NormalMode = (function () {
 var TileMode = (function () {
 	var mt, mr;
 
-	var globCols;
+	var globCols; 
 
 	var
 		grid = $('#grid'),
@@ -289,7 +289,7 @@ var TileMode = (function () {
 	}
 
 	function _showHideBlocks () {
-		var
+		var 
 			inputMbMarkup = '<input type="text" value="00" class="position__controller_X-input dynamic" id="mb"/>',
 			inputMrMarkup = '<input type="text" value="00" class="position__controller_Y-input dynamic" id="mr"/>',
 			gridMbMarkup = '<div id="gridMb" class="gridMb dynamic"></div>',
@@ -301,7 +301,7 @@ var TileMode = (function () {
 		yInput.after(inputMrMarkup);
 
 		grid.append(gridMbMarkup);
-		grid.append(gridMrMarkup);
+		grid.append(gridMrMarkup); 
 		//Создали динамически все что нужно
 
 		xInput.hide();
@@ -312,23 +312,24 @@ var TileMode = (function () {
 
 
 	function _tileIt () {
-
-		var
-			clone = watermark.html();
-
+		
+		var 
+			clone = watermark.html(),
+			markup = '';
+			
 			console.log(clone.length);
 
-		var
+		var 
 			imageWidth = image.outerWidth(),
 			imageHeight = image.outerHeight(),
 			watermarkWidth = watermark.children().outerWidth(),
 			watermarkHeight = watermark.children().outerHeight();
 
-		var
+		var 
 			cols = Math.ceil(+imageWidth / +watermarkWidth),
 			rows = Math.ceil(+imageHeight / +watermarkHeight),
 			clonesToAddCount = (cols+4)*(rows+4);
-
+		
 		globCols = cols+4;
 
 		watermark.css({
@@ -337,23 +338,29 @@ var TileMode = (function () {
 			'margin-left' : -(watermarkWidth*2),
 			'left' : 0,
 			'top' : 0,
-		});
+		}); //Сбрасываем и сдвигаем обертку влево-вверх
 
 		mt = +watermark.css('margin-top').replace('px','');
 		ml = +watermark.css('margin-left').replace('px','');
 
 		for (var i = 0;  i <= clonesToAddCount; i++) {
-			watermark.append(clone);
-			if (i>400) break;
+			markup += clone;
 		};
+		watermark.html(markup);
+		markup = '';
 
 		$.each($('.workspase__wotermark-watermark:not(:first)'), function(index, val) {
 			 $(this).addClass('dynamic');
-		});
+		}); //Динамические элементы метим
 
 		console.log('Произведено ' + (+clonesToAddCount+1)  + ' клонирований(я) вотермарка для замощения');
 
 		watermarks = $('.workspase__wotermark-watermark');
+
+		watermarks.css({
+			'margin-right' : 0,
+			'margin-bottom' : 0
+		})
 
 		_setUpListeners();
 	}
@@ -374,13 +381,11 @@ var TileMode = (function () {
 
 	function _marginBottomIt (event) {
 		_letterCheck($(this));
-		_minMaxCheck($(this));
 		_marginIt( 'margin-bottom', 'margin-top', $(this), $('#gridMb'), 'height', mt);
-	}
+	}	
 
 	function _marginRightIt (event) {
 		_letterCheck($(this));
-		_minMaxCheck($(this));
 		_marginIt( 'margin-right', 'margin-left', $(this), $('#gridMr'), 'width', ml);
 	}
 
@@ -390,22 +395,28 @@ var TileMode = (function () {
 		    '+': function(a, b) { return a + b },
 		    '-': function(a, b) { return a - b },
 		};
-
-		watermarks.css(marginStyle, operators[operator](current, step) + 'px');
-		watermark.css(revMargin, (watermarkMargin - operators[operator](current*2, +step*2))+ 'px');
-		grid.css(gridParam, (operators[operator](current, step))/2 + 'px');
-		grid.css(revMargin, (operators[revOperator](-current, step))/4 + 'px');
 		input.val(operators[operator](current, step));
 
-		if (gridParam = 'width') {
-			var newWidth = globCols*(+watermarks.css('width').replace('px', '') + +watermarks.css('margin-right').replace('px', ''));
-			watermark.css(gridParam, newWidth);
+		if (_minMaxCheck(input)) {
+			return false;
+		} else {
+			watermarks.css(marginStyle, operators[operator](current, step) + 'px');
+			watermark.css(revMargin, (watermarkMargin - operators[operator](current*2, +step*2))+ 'px');
+			grid.css(gridParam, (operators[operator](current, step))/2 + 'px');
+			grid.css(revMargin, (operators[revOperator](-current, step))/4 + 'px');
+			
+
+			if (gridParam = 'width') {
+				var newWidth = globCols*(+watermarks.css('width').replace('px', '') + +watermarks.css('margin-right').replace('px', ''));
+				watermark.css(gridParam, newWidth);
+			}
 		}
+
+
 	}
 
 	function _marginItFromArrows(event) {
 		event.preventDefault();
-
 
 		var
 			$this = $(this),
@@ -416,12 +427,12 @@ var TileMode = (function () {
 			currentMrInt = parseInt(currentMr, 10),
 			mb = $('#mb'),
 			mr = $('#mr');
-		var
+		var 
 			gridMb = $('#gridMb'),
 			gridMr = $('#gridMr');
 
 		if (className.indexOf('up') + 1) {
-
+			
 			if (className.indexOf('position__controller_X') + 1) {
 				_marginItArr ('margin-bottom', 'margin-top', currentMbInt, '+', '-', mb, gridMb, 'height', mt, 3);
 				//Кнопка увеличить margin bottom
@@ -441,26 +452,23 @@ var TileMode = (function () {
 	}
 
 	function _letterCheck (input) {
-		var
+		var 
 			value = input.val(),
-	    	rep = /[-\.;":'a-zA-Zа-яА-Я]/;
+	    	rep = /[-\.;":'a-zA-Zа-яА-Я]/; 
 
-	    if (rep.test(value)) {
-	        input.val(value.replace(rep, ''));
-	        input.value = value;
-	    }
+	    if (rep.test(value)) { 
+	        input.val(value.replace(rep, ''));  
+	        input.value = value; 
+	    } 
 	} // Удаляем буквы, которые вводит пользователь
 
 	function _minMaxCheck (input) {
-		var
+		var 
 			value = input.val();
 			width = image.outerWidth() - watermarks.outerWidth();
 
-			console.log(width)
-
-		if (value < -20) {
-			input.val(20);
-			console.log('<');
+		if (value < 0) {
+			input.val(0);
 			return true;
 		} else if (value > width) {
 			input.val(width);
@@ -481,7 +489,7 @@ var TileMode = (function () {
 			arrows.off('click'); // Убиваем события кнопок. Другой режим - другие события
 			buttons.removeClass('active'); //и убираем подсветку кнопки
 			_showHideBlocks();
-
+			
 		}
 	}
 })();

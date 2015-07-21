@@ -1,6 +1,9 @@
 var imgUpload = (function () {
     var url = 'uploads/';
-    $('#input-upload-img').fileupload({
+    var uploadImg = $('#input-upload-img');
+    var uploadWatermark = $('#input-upload-watermark');
+
+    uploadImg.fileupload({
         url: url,
         dataType: 'json',
         done: function (e, data) {
@@ -9,9 +12,10 @@ var imgUpload = (function () {
                 $('#input-image').attr('value', file.name);
             });
             PosMode.init(); // Перекидываем в обычный режим, иначе жесть
+            uploadWatermark.removeAttr('disabled')
         }
     });
-    $('#input-upload-watermark').fileupload({
+    uploadWatermark.fileupload({
         url: url,
         dataType: 'json',
         done: function (e, data) {
