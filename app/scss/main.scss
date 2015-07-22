@@ -1,6 +1,7 @@
 @import '_vars';
 @import '_roboto';
 @import '_buttons_sprite';
+@import '_icons_sprite';
 @import 'position';
 
 @import '../bower/materialize/sass/materialize';
@@ -23,6 +24,12 @@
     position: relative;
     max-width: 100%;
     max-height: 533px;
+
+    top:0;
+    right:0;
+    bottom: 0;
+    left: 0;
+    margin:auto;
 
     img {
         max-width: 100%;
@@ -51,7 +58,7 @@ body {
     min-width: 960px;
     height: 100%;
     margin: 0;
-    color: #4a545d;
+    color: $body;
 }
 
 .text-hide {
@@ -72,6 +79,64 @@ body {
     clear: both;
     height: 0;
 }
+
+
+/*Сайдбар*/
+.sidebar{
+    position: fixed;
+    top:100px;
+    left: 0px;
+    z-index: 9999
+}
+.sidebar-lang{
+    width: 43px;
+    margin-bottom: 20px;
+}
+.sidebar-lang__rus{
+    margin-bottom: 1px;
+}
+.sidebar-lang__rus, .sidebar-lang__eng{
+    background-color: rgba(255,255,255,0.7);
+    padding:5px;
+    color:$txt;
+    &:hover{
+        color: #000;
+        cursor: pointer;
+    }
+}
+.sidebar-social{
+    min-width:86px;
+    margin-left: -43px;
+}
+.sidebar-social__list{
+    width: 43px;
+    float: left;
+    display: block;
+    background-color: rgba(255,255,255,0.7);
+    margin-top: 0px;
+    text-indent: -9999px;
+}
+.social-item{
+    width: 42px;
+    height: 42px;
+}
+.social__icons-link{
+    display: block;
+    width: 42px;
+    height: 42px; 
+}
+.sidebar-social__like{
+    width: 43px;
+    height: 43px;
+    float: right;
+    background-color: rgba(255,255,255,0.7);
+    text-indent: -9999px;
+}
+
+
+
+/*Сайдбар-конец*/
+
 
 /* прибьём футер к низу   */
 body {

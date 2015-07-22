@@ -4,9 +4,33 @@
 	width: 25px;
 	text-align: center;
 }
+.workspase_wotermark-wrap {
+	@extend .clearfix;
+	font-size: 0px;
+}
+
+
+.workspase__wotermark-watermark {
+	float:left;
+	margin: 0;
+	padding: 0;
+}
+
+
+.workspase__uploud-image {
+	overflow: hidden;
+	font-size: 0;
+}
 
 .position__controller-wrap {
 	width: 44%!important;
+}
+
+.grid {
+	position: relative;
+	.active {
+		background-color: #f97e76!important;
+	}
 }
 
 .tile {
@@ -20,7 +44,29 @@
 	    		&:hover, &-active {
 	    			background-color: #dbe1e8!important;
 	    		}
+
 	    	}
 		}
 	}
+}
+
+.gridMb,
+.gridMr {
+	position: absolute;
+	display: block;
+	background-color: #f97e76;
+}
+
+.gridMb {
+	top:50%;
+	left:0;
+	height: 1px;
+	width: 100%;
+}
+
+.gridMr {
+	left:50%;
+	top:0;
+	height: 100%;
+	width: 1px;
 }

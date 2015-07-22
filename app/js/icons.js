@@ -1,0 +1,9 @@
+$(function(){
+	$('.sidebar-social').hover(function(){
+			$('.sidebar-social').stop().animate({'marginLeft':'0px'},500);
+		},
+		function(){
+			$('.sidebar-social').stop().animate({'marginLeft':'-43px'},500);
+		}
+	);
+});
