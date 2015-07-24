@@ -97,6 +97,30 @@
   height: 22px;
   background-position: -31px -3px; }
 
+.sprite {
+  background-image: url(../img/icons_sprite.png);
+  background-repeat: no-repeat;
+  display: block; }
+
+.sprite-fb {
+  background-position: 5px 2px; }
+  .sprite-fb:hover {
+    background-position: -25px 2px;
+    cursor: pointer; }
+
+.sprite-like {
+  background-position: -62px -3px; }
+
+.sprite-tw {
+  background-position: -103px 5px; }
+  .sprite-tw:hover {
+    background-position: -146px 2px; }
+
+.sprite-vk {
+  background-position: -194px 4px; }
+  .sprite-vk:hover {
+    background-position: -241px 2px; }
+
 .position__controller_X-description,
 .position__controller_Y-description {
   display: inline-block;
@@ -8588,6 +8612,57 @@ body {
   clear: both;
   height: 0; }
 
+/*Сайдбар*/
+.sidebar {
+  position: fixed;
+  top: 100px;
+  left: 0px;
+  z-index: 9999; }
+
+.sidebar-lang {
+  width: 43px;
+  margin-bottom: 20px; }
+
+.sidebar-lang__rus {
+  margin-bottom: 1px; }
+
+.sidebar-lang__rus, .sidebar-lang__eng {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px;
+  color: #686363; }
+  .sidebar-lang__rus:hover, .sidebar-lang__eng:hover {
+    color: #000;
+    cursor: pointer; }
+
+.sidebar-social {
+  min-width: 86px;
+  margin-left: -43px; }
+
+.sidebar-social__list {
+  width: 43px;
+  float: left;
+  display: block;
+  background-color: rgba(255, 255, 255, 0.7);
+  margin-top: 0px;
+  text-indent: -9999px; }
+
+.social-item {
+  width: 42px;
+  height: 42px; }
+
+.social__icons-link {
+  display: block;
+  width: 42px;
+  height: 42px; }
+
+.sidebar-social__like {
+  width: 43px;
+  height: 43px;
+  float: right;
+  background-color: rgba(255, 255, 255, 0.7);
+  text-indent: -9999px; }
+
+/*Сайдбар-конец*/
 /* прибьём футер к низу   */
 body {
   display: flex;
