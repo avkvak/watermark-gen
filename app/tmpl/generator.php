@@ -1,7 +1,6 @@
 <aside class="controllers">
   <h2 class="controllers-title">Настройки</h2>
-    <form action="tmpl/watermark.php" method="post" class="controllers-form" enctype="multipart/form-data">
-    <input type="file" name="org_image" multiple><br>
+    <form action="" method="post" class="controllers-form" enctype="multipart/form-data">
     <!--Раздел загрузки файлов-->
     <div class="uploud block">
       <div class="input-form">
@@ -10,7 +9,7 @@
           <input type="text" name="image" id="input-image" value="Загрузите изображение" disabled="disabled" class="input"/><span class="upload-img"></span>
         </label>
         <label for="input-upload-img"></label>
-        <input id="input-upload-img" class="upload-btn" type="file" name="files" multiple>
+        <input id="input-upload-img" class="upload-btn" type="file" name="files[]" multiple>
       </div>
       <div class="input-form">
         <div class="title-label">Водяной знак</div>
@@ -18,7 +17,7 @@
           <input type="text" name="watermark" id="input-watermark" value="Загрузите водяной знак" disabled="disabled" class="input"/><span class="upload-img"></span>
         </label>
         <label for="input-upload-watermark"></label>
-        <input type="file" name="files" id="input-upload-watermark" class="upload-btn" disabled/>
+        <input type="file" name="files[]" id="input-upload-watermark" class="upload-btn" disabled/>
       </div>
     </div>
     <!--Раздел положение wotermark-->

@@ -1,6 +1,6 @@
 <?php
 
-define('WATERMARK_OVERLAY_IMAGE', '../img/watermark.png');
+define('WATERMARK_OVERLAY_IMAGE', '../'.$_POST['watermark']);
 define('WATERMARK_OVERLAY_OPACITY', 50);
 define('WATERMARK_OUTPUT_QUALITY', 90);
 
@@ -42,19 +42,17 @@ function create_watermark($source_file_path, $output_file_path) {
     );
 
     imagejpeg($source_gd_image, $output_file_path, WATERMARK_OUTPUT_QUALITY);
-
-    imagedestroy($source_gd_image);
-    imagedestroy($overlay_gd_image);
 }
 
-define('UPLOADED_IMAGE_DESTINATION', '../originals/');
-define('PROCESSED_IMAGE_DESTINATION', '../uploads/');
+define('UPLOADED_IMAGE_DESTINATION', '../uploads/files/');
+define('PROCESSED_IMAGE_DESTINATION', '../uploads/watermark/');
 
-function process_image_upload($Field) {
-    $temp_file_path = $_FILES[$Field]['tmp_name'];
-    $temp_file_name = $_FILES[$Field]['name'];
+function process_image_upload() {
 
-    list(, , $temp_type) = getimagesize($temp_file_path);
+    $image = '../'.$_POST['image'];
+    $name = $_POST['name'];
+
+    list(, , $temp_type) = getimagesize($image);
 
     if ($temp_type === NULL) {
         return false;
@@ -71,10 +69,10 @@ function process_image_upload($Field) {
             return false;
     }
 
-    $uploaded_file_path = UPLOADED_IMAGE_DESTINATION . $temp_file_name;
-    $processed_file_path = PROCESSED_IMAGE_DESTINATION . preg_replace('/\\.[^\\.]+$/', '.jpg', $temp_file_name);
+    $uploaded_file_path = UPLOADED_IMAGE_DESTINATION . $name;
+    $processed_file_path = PROCESSED_IMAGE_DESTINATION . preg_replace('/\\.[^\\.]+$/', '.jpg', $name);
 
-    move_uploaded_file($temp_file_path, $uploaded_file_path);
+    move_uploaded_file($image, $uploaded_file_path);
 
     $result = create_watermark($uploaded_file_path, $processed_file_path);
 
@@ -85,11 +83,10 @@ function process_image_upload($Field) {
     }
 }
 
-$result = process_image_upload('org_image');
+$result = process_image_upload();
 
 if ($result === false) {
-    echo '<br>error';
+    echo 'error';
 } else {
-    echo '<br>Download<a href="' . $result[1] . '" target="_blank">' . $result[1] . '</a>';
+    echo $result[1];
 }
-?>

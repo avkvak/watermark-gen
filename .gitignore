@@ -7,5 +7,5 @@ app/*.html
 app/uploads/files
 .idea
 watermark-images
-filigran
 app/img/serpito.png
+app/uploads/watermark
