@@ -20,6 +20,8 @@
 <script src="js/position.js"></script>
 <script src="js/drag.js"></script>
 <script src="js/resize.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/share.js"></script>
 <!-- endbuild -->
 
 </body>
