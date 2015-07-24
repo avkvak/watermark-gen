@@ -26,7 +26,7 @@ include "tmpl/header.php";
     <section class="center-content clearfix">
       <!--Рабочая область-->
       <section class="workspace">
-        <h1 class="workspace-title">Генератор водяных знаков</h1>
+        <h1 class="workspace-title"><?php echo $labels['name']; ?></h1>
 
         <div class="workspace-inner clearfix">
           <div class="workspase__uploud-image">

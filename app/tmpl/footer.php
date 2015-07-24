@@ -1,5 +1,5 @@
 <footer class="page-footer">
-    <div class="page-footer-copyright">(с)2015, Это наш сайт, пожалуйста, не воруйте и не копируйте его</div>
+    <div class="page-footer-copyright"><?php echo $labels['foot']; ?></div>
 </footer>
 
 
@@ -16,12 +16,15 @@
 
 <script src="js/position.js"></script>
 <script src="js/opacity.js"></script>
-<script src="js/reset.js"></script>
+
 <script src="js/position.js"></script>
 <script src="js/drag.js"></script>
 <script src="js/resize.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/share.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/share.js"></script>
+<script src="js/reset.js"></script>
 <!-- endbuild -->
 
 </body>
