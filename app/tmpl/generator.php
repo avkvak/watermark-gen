@@ -52,10 +52,10 @@
         <!--Кнопки управления-->
         <div class="position__controller-wrap">
           <div class="position__controller_X"><span class="position__controller_X-description">X</span>
-            <input type="text" value="00" class="position__controller_X-input"/><a href="#" class="position__controller_X-up"></a><a href="#" class="position__controller_X-down"></a>
+            <input type="text" value="00" id="normalX" class="position__controller_X-input"/><a href="#" class="position__controller_X-up"></a><a href="#" class="position__controller_X-down"></a>
           </div>
           <div class="position__controller_Y"><span class="position__controller_Y-description">Y</span>
-            <input type="text" value="00" class="position__controller_Y-input"/><a href="#" class="position__controller_Y-up"></a><a href="#" class="position__controller_Y-down"></a>
+            <input type="text" value="00" id="normalY" class="position__controller_Y-input"/><a href="#" class="position__controller_Y-up"></a><a href="#" class="position__controller_Y-down"></a>
           </div>
         </div>
       </div>
