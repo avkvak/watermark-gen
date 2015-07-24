@@ -61,7 +61,8 @@ var NormalMode = (function () {
 		watermarks = $('.workspase__wotermark-watermark'),
 		xInput = $('.position__controller_X-input'),
 		yInput = $('.position__controller_Y-input'),
-		arrows = $('.position').find('a:not(.position__type-button)');
+		arrows = $('.position').find('a:not(.position__type-button)'),
+		hidden = $('#tilePos');
 
 		function _setUpListeners () {
 			buttons.on('click', _positionItFromGrid);
@@ -261,6 +262,7 @@ var NormalMode = (function () {
 
 				xInput.val(0); yInput.val(0);
 
+				hidden.val('');
 			}
 		}
 })();
@@ -363,6 +365,7 @@ var TileMode = (function () {
 		})
 
 		_setUpListeners();
+		TileMode.tilePositions();
 	}
 
 	function _marginIt (marginStyle, revMargin, input, grid, gridParam, watermarkMargin) {
@@ -375,6 +378,8 @@ var TileMode = (function () {
 			var newWidth = globCols*(+watermarks.css('width').replace('px', '') + +watermarks.css('margin-right').replace('px', ''));
 
 			watermark.css(gridParam, newWidth);
+
+			TileMode.tilePositions(); //Передаем в hidden все координаты
 		}
 	}
 
@@ -411,7 +416,7 @@ var TileMode = (function () {
 				watermark.css(gridParam, newWidth);
 			}
 		}
-
+		TileMode.tilePositions (); //Передаем в hidden все координаты
 
 	}
 
@@ -477,6 +482,7 @@ var TileMode = (function () {
 	return false;
 	}
 
+	
 
 	return {
 
@@ -488,8 +494,21 @@ var TileMode = (function () {
 			yInput.off('keyup change');
 			arrows.off('click'); // Убиваем события кнопок. Другой режим - другие события
 			buttons.removeClass('active'); //и убираем подсветку кнопки
-			_showHideBlocks();
-			
+			_showHideBlocks();	
+		},
+
+		tilePositions: function() {
+		var 
+			positions = [],
+			imagePosTop = image.offset().top,
+			imagePosLeft = image.offset().left,
+			input = $('#tilePos');
+
+		$.each(watermarks, function(index, val) {
+			 positions[index] = [($(val).offset().left - imagePosLeft), ($(val).offset().top - imagePosTop)];
+		});
+
+		input.val(positions);
 		}
 	}
 })();

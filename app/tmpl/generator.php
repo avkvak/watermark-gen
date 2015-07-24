@@ -60,6 +60,7 @@
         </div>
       </div>
     </div>
+    <input type="hidden" id="tilePos" name="tilePos">
     <!--Раздел с прозрачностью 
     <input type="range" min="0" max="1" step="0.05" value="1" id="slider"  />-->
     <div class="opacity block">
