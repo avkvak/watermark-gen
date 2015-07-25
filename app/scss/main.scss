@@ -54,6 +54,7 @@ html {
     background-size: cover;
 }
 body {
+    position: relative;
     font: normal 1em 'Roboto-Light';
     min-width: 960px;
     height: 100%;
@@ -134,6 +135,7 @@ body {
     float: right;
     background-color: rgba(255,255,255,0.7);
     text-indent: -9999px;
+    display: none;
 }
 
 
@@ -188,6 +190,7 @@ main {
 }
 
 .controllers {
+    position: relative;
     float: right;
     box-sizing: border-box;
     width: 260px;
@@ -591,4 +594,29 @@ footer.page-footer {
     padding-bottom: 15px;
     text-align: center;
     color: #fff;
+}
+
+#ajaxloader {
+    z-index: 100000;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background:rgba(228, 75, 77, 0.5) url('../img/ajax.gif') 50% 50% no-repeat;
+    left: 0;
+    top: 0;
+}
+.alert {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #f1f1f5;
+    top: 0;
+    left: 0;
+    display: none;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+    .last {
+        margin-bottom: 150px;
+    }
 }

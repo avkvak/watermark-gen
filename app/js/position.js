@@ -3,11 +3,14 @@ var PosMode = (function () {
 		button = $('.position__type-button'),
 		normal = $('.position__type-button_normal'),
 		tile = $('.position__type-button_tile'),
+		image = $('.workspase__wotermark-image'),
 		normalActive = 'position__type-button_normal-active',
 		tileActive = 'position__type-button_tile-active',
 		contX = $('.position__controller_X-description'),
 		contY = $('.position__controller_Y-description'),
 		block = $('.position'),
+		xInput = $('.position__controller_X-input'),
+		yInput = $('.position__controller_Y-input'),
 		buttons = $('#grid').children().children();
 
 	function _setUpListeners () {
@@ -46,7 +49,25 @@ var PosMode = (function () {
 			console.log('PosMode initiated');
 			_setUpListeners();
 			_goToNormal(); //Как только мы загрузились, мы сразу же в нормальном режиме.
-	    }
+	    },
+
+	    positions: function() {
+		var 
+			positions = [],
+			imagePosTop = image.offset().top,
+			imagePosLeft = image.offset().left,
+			watermarks = $('.workspase__wotermark-watermark');
+
+		if (block.hasClass('tile')) {
+			$.each(watermarks, function(index, val) {
+				 positions[index] = [($(val).offset().left - imagePosLeft), ($(val).offset().top - imagePosTop)];
+			});
+		} else {
+			positions = [xInput.val(), yInput.val()];
+		}
+		
+		return positions;
+		}
 	}
 
 }());
@@ -366,7 +387,6 @@ var TileMode = (function () {
 		})
 
 		_setUpListeners();
-		TileMode.tilePositions();
 	} //Замостить!
 
 	function _marginIt (marginStyle, revMargin, input, grid, gridParam, watermarkMargin) {
@@ -411,13 +431,11 @@ var TileMode = (function () {
 			grid.css(gridParam, (operators[operator](current, step))/2 + 'px');
 			grid.css(revMargin, (operators[revOperator](-current, step))/4 + 'px');
 			
-
 			if (gridParam = 'width') {
 				var newWidth = globCols*(+watermarks.css('width').replace('px', '') + +watermarks.css('margin-right').replace('px', ''));
 				watermark.css(gridParam, newWidth);
 			}
 		}
-		TileMode.tilePositions (); //Передаем в hidden все координаты
 
 	}//Универсальная функция для позиционирования по стрелкам
 
@@ -494,22 +512,8 @@ var TileMode = (function () {
 			arrows.off('click'); // Убиваем события кнопок. Другой режим - другие события
 			buttons.removeClass('active'); //и убираем подсветку кнопки
 			_showHideBlocks();	
-		},
+		}
 
-		tilePositions: function() {
-		var 
-			positions = [],
-			imagePosTop = image.offset().top,
-			imagePosLeft = image.offset().left,
-			input = $('#tilePos');
-		if (block.hasClass('tile')) {
-			$.each(watermarks, function(index, val) {
-				 positions[index] = [($(val).offset().left - imagePosLeft), ($(val).offset().top - imagePosTop)];
-			});
-		}
-		
-		input.val(positions);
-		}
 	}
 })();
 
