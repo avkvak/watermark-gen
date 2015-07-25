@@ -616,7 +616,12 @@ footer.page-footer {
     padding: 20px;
     font-size: 20px;
     text-align: center;
-    .last {
-        margin-bottom: 150px;
+    img {
+       max-width: 100%;
+    }
+    small {
+        text-align: right;
+        display: block;
+        width: 100%;
     }
 }
