@@ -99,6 +99,9 @@ body {
     background-color: rgba(255,255,255,0.7);
     padding:5px;
     color:$txt;
+    a {
+        color:$txt;  
+    }
     &:hover{
         color: #000;
         cursor: pointer;

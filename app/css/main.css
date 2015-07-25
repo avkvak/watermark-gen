@@ -8630,6 +8630,8 @@ body {
   background-color: rgba(255, 255, 255, 0.7);
   padding: 5px;
   color: #686363; }
+  .sidebar-lang__rus a, .sidebar-lang__eng a {
+    color: #686363; }
   .sidebar-lang__rus:hover, .sidebar-lang__eng:hover {
     color: #000;
     cursor: pointer; }

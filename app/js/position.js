@@ -228,7 +228,7 @@ var NormalMode = (function () {
 
 			buttons.removeClass('active'); //и убираем подсветку кнопки
 
-		}
+		}//Позиционируем по стрелкам
 
 		return {
 
@@ -367,7 +367,7 @@ var TileMode = (function () {
 
 		_setUpListeners();
 		TileMode.tilePositions();
-	}
+	} //Замостить!
 
 	function _marginIt (marginStyle, revMargin, input, grid, gridParam, watermarkMargin) {
 		watermarks.css(marginStyle, input.val() + 'px');
@@ -382,7 +382,7 @@ var TileMode = (function () {
 
 			TileMode.tilePositions(); //Передаем в hidden все координаты
 		}
-	}
+	} //Универсальная функция для позиционирования по инпутам
 
 
 	function _marginBottomIt (event) {
@@ -419,7 +419,7 @@ var TileMode = (function () {
 		}
 		TileMode.tilePositions (); //Передаем в hidden все координаты
 
-	}
+	}//Универсальная функция для позиционирования по стрелкам
 
 	function _marginItFromArrows(event) {
 		event.preventDefault();
@@ -481,9 +481,7 @@ var TileMode = (function () {
 			return true;
 		}
 	return false;
-	}
-
-	
+	} //Не меньше 0 и не больше ширины	
 
 	return {
 
