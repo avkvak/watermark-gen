@@ -3,33 +3,23 @@ session_start();
 
 $host = $_SERVER['SERVER_NAME'];
 
-if (isset($_GET['lang'])){
-  $lang = $_GET['lang'];
-} elseif($_SESSION['lang']){
-  $lang = $_SESSION['lang'];
-} else{
-  $lang = 'ru';
+$lang_data = parse_ini_file('lang.ini', true);
+
+if(isset($_SESSION['lang'])){
+    $lang = $_SESSION['lang'];
+} else {
+    $lang = 'ru';
 }
 
 switch($lang){
-  case 'eng':
-  case 'ru':
-    $_SESSION['lang'] = $lang;
-    break;
-  default:
-    $_SESSION['lang'] = 'ru';
+    case 'us':
+    case 'ru':
+        $labels = $lang_data[$lang];
+        break;
+    default:
+        $labels = $lang_data['ru'];
+        break;
 }
-
-if(!file_exists('lang.ini')){
-  die("Not exist file language");
-}
-
-$lang_config = parse_ini_file('lang.ini', true);
-if(!$lang_config){
-  die("Error! Can not read language file!");
-}
-
-$labels = $lang_config[$lang];
 
 ?>
 <!DOCTYPE html>

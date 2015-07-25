@@ -7,7 +7,7 @@ include "tmpl/header.php";
   <aside class="sidebar">
     <div class="sidebar-lang">
       <div class="sidebar-lang__rus"><a href="lang.php?lang=ru">РУС</a></div>
-      <div class="sidebar-lang__eng"><a href="lang.php?lang=eng">ENG</a></div>
+      <div class="sidebar-lang__eng"><a href="lang.php?lang=us">ENG</a></div>
     </div>
     <div class="sidebar-social cle">
       <ul class="sidebar-social__list">
