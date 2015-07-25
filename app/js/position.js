@@ -282,6 +282,7 @@ var TileMode = (function () {
 		xInput = $('.position__controller_X-input'),
 		yInput = $('.position__controller_Y-input'),
 		arrows = $('.position').find('a:not(.position__type-button)'),
+		block = $('.position'),
 		watermarks;
 
 	function _setUpListeners () {
@@ -503,11 +504,12 @@ var TileMode = (function () {
 			imagePosTop = image.offset().top,
 			imagePosLeft = image.offset().left,
 			input = $('#tilePos');
-
-		$.each(watermarks, function(index, val) {
-			 positions[index] = [($(val).offset().left - imagePosLeft), ($(val).offset().top - imagePosTop)];
-		});
-
+		if (block.hasClass('tile')) {
+			$.each(watermarks, function(index, val) {
+				 positions[index] = [($(val).offset().left - imagePosLeft), ($(val).offset().top - imagePosTop)];
+			});
+		}
+		
 		input.val(positions);
 		}
 	}

@@ -44,10 +44,6 @@ function dragNDrop () {
 		button.removeClass('active');
 		inputX.val(currentXInt);
 		inputY.val(currentYInt);
-
-		if (pos.hasClass('tile')) {
-			TileMode.tilePositions();
-		}
 		
 	});
 
