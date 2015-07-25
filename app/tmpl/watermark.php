@@ -1,11 +1,95 @@
 <?php
 
-define('WATERMARK_OVERLAY_IMAGE', '../'.$_POST['watermark']);
-define('WATERMARK_OVERLAY_OPACITY', 50);
-define('WATERMARK_OUTPUT_QUALITY', 90);
+resizeImage('../' . $_POST['image'], '../uploads/files/' . $_POST['name'], '650', '580', '100');
 
-function create_watermark($source_file_path, $output_file_path) {
-    list($source_width, $source_height, $source_type) = getimagesize($source_file_path);
+define('WATERMARK_SOURCE_NAME', $_POST['name']);
+define('WATERMARK_SOURCE_IMAGE', '../uploads/files/' . $_POST['name']);
+define('WATERMARK_OVERLAY_IMAGE', '../' . $_POST['watermark']);
+define('WATERMARK_OVERLAY_OPACITY', $_POST['opacity'] * 100);
+define('WATERMARK_OUTPUT_QUALITY', 90);
+define('pos_X', $_POST['normalX']);
+define('pos_Y', $_POST['normalY']);
+
+function filter_opacity(&$img, $opacity)
+{
+    if (!isset($opacity)) {
+        return false;
+    }
+    $opacity /= 100;
+
+    $w = imagesx($img);
+    $h = imagesy($img);
+
+    imagealphablending($img, false);
+
+    $minalpha = 127;
+    for ($x = 0; $x < $w; $x++) {
+        for ($y = 0; $y < $h; $y++) {
+            $alpha = (imagecolorat($img, $x, $y) >> 24) & 0xFF;
+            if ($alpha < $minalpha) {
+                $minalpha = $alpha;
+            }
+        }
+    }
+
+    for ($x = 0; $x < $w; $x++) {
+        for ($y = 0; $y < $h; $y++) {
+
+            $colorxy = imagecolorat($img, $x, $y);
+            $alpha = ($colorxy >> 24) & 0xFF;
+
+            if ($minalpha !== 127) {
+                $alpha = 127 + 127 * $opacity * ($alpha - 127) / (127 - $minalpha);
+            } else {
+                $alpha += 127 * $opacity;
+            }
+            $alphacolorxy = imagecolorallocatealpha($img, ($colorxy >> 16) & 0xFF, ($colorxy >> 8) & 0xFF, $colorxy & 0xFF, $alpha);
+            if (!imagesetpixel($img, $x, $y, $alphacolorxy)) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+function resizeImage($sourceImage, $targetImage, $maxWidth, $maxHeight, $quality = 80)
+{
+    if (!$image = @imagecreatefromjpeg($sourceImage)) {
+        return false;
+    }
+
+    list($origWidth, $origHeight) = getimagesize($sourceImage);
+
+    if ($maxWidth == 0) {
+        $maxWidth = $origWidth;
+    }
+
+    if ($maxHeight == 0) {
+        $maxHeight = $origHeight;
+    }
+
+    $widthRatio = $maxWidth / $origWidth;
+    $heightRatio = $maxHeight / $origHeight;
+
+    $ratio = min($widthRatio, $heightRatio);
+
+    $newWidth = (int)$origWidth * $ratio;
+    $newHeight = (int)$origHeight * $ratio;
+
+    $newImage = imagecreatetruecolor($newWidth, $newHeight);
+    imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $origWidth, $origHeight);
+    imagejpeg($newImage, $targetImage, $quality);
+
+    imagedestroy($image);
+    imagedestroy($newImage);
+
+    return true;
+}
+
+function create_watermark($source_file_path, $output_file_path)
+{
+    list(, , $source_type) = getimagesize($source_file_path);
 
     if ($source_type === NULL) {
         return false;
@@ -26,33 +110,27 @@ function create_watermark($source_file_path, $output_file_path) {
     }
 
     $overlay_gd_image = imagecreatefrompng(WATERMARK_OVERLAY_IMAGE);
+    filter_opacity($overlay_gd_image, WATERMARK_OVERLAY_OPACITY);
+    imagealphablending($overlay_gd_image, false);
     $overlay_width = imagesx($overlay_gd_image);
     $overlay_height = imagesy($overlay_gd_image);
 
-    imagecopymerge(
-        $source_gd_image,
-        $overlay_gd_image,
-        $source_width - $overlay_width,
-        $source_height - $overlay_height,
-        0,
-        0,
-        $overlay_width,
-        $overlay_height,
-        WATERMARK_OVERLAY_OPACITY
-    );
+    imagecopy($source_gd_image, $overlay_gd_image, pos_X, pos_Y, 0, 0, $overlay_width, $overlay_height);
 
     imagejpeg($source_gd_image, $output_file_path, WATERMARK_OUTPUT_QUALITY);
+    imagedestroy($source_gd_image);
+    imagedestroy($overlay_gd_image);
 }
 
 define('UPLOADED_IMAGE_DESTINATION', '../uploads/files/');
 define('PROCESSED_IMAGE_DESTINATION', '../uploads/watermark/');
 
-function process_image_upload() {
+function process_image_upload()
+{
+    $temp_file_path = WATERMARK_SOURCE_IMAGE;
+    $temp_file_name = WATERMARK_SOURCE_NAME;
 
-    $image = '../'.$_POST['image'];
-    $name = $_POST['name'];
-
-    list(, , $temp_type) = getimagesize($image);
+    list(, , $temp_type) = getimagesize($temp_file_path);
 
     if ($temp_type === NULL) {
         return false;
@@ -69,10 +147,10 @@ function process_image_upload() {
             return false;
     }
 
-    $uploaded_file_path = UPLOADED_IMAGE_DESTINATION . $name;
-    $processed_file_path = PROCESSED_IMAGE_DESTINATION . preg_replace('/\\.[^\\.]+$/', '.jpg', $name);
+    $uploaded_file_path = UPLOADED_IMAGE_DESTINATION . $temp_file_name;
+    $processed_file_path = PROCESSED_IMAGE_DESTINATION . preg_replace('/\\.[^\\.]+$/', '.jpg', $temp_file_name);
 
-    move_uploaded_file($image, $uploaded_file_path);
+    move_uploaded_file($temp_file_path, $uploaded_file_path);
 
     $result = create_watermark($uploaded_file_path, $processed_file_path);
 
@@ -81,12 +159,14 @@ function process_image_upload() {
     } else {
         return array($uploaded_file_path, $processed_file_path);
     }
+
 }
 
 $result = process_image_upload();
 
 if ($result === false) {
-    echo 'error';
+    echo 'Error';
 } else {
     echo $result[1];
+
 }
