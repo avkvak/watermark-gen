@@ -13,6 +13,7 @@
 <script src="bower/jquery-file-upload/js/jquery.fileupload.js"></script>
 
 <script src="js/upload.js"></script>
+<script src="js/download.js"></script>
 
 <script src="js/position.js"></script>
 <script src="js/opacity.js"></script>

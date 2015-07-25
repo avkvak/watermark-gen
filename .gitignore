@@ -6,3 +6,6 @@ dist
 app/*.html
 app/uploads/files
 .idea
+watermark-images
+app/img/serpito.png
+app/uploads/watermark
