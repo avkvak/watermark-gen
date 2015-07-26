@@ -17,7 +17,7 @@
           <input type="text" name="watermark" id="input-watermark" value="Загрузите водяной знак" disabled="disabled" class="input"/><span class="upload-img"></span>
         </label>
         <label for="input-upload-watermark"></label>
-        <input type="file" name="files" id="input-upload-watermark" class="upload-btn"/>
+        <input type="file" name="files" id="input-upload-watermark" class="upload-btn" disabled/>
       </div>
     </div>
     <!--Раздел положение wotermark-->

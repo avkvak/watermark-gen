@@ -3,6 +3,8 @@ var imgDownload = (function () {
     $('.controllers-form').on('submit', function(e){
         e.preventDefault();
 
+        if ($('#input-image').val() === 'Загрузите изображение' || $('#input-watermark').val() === 'Загрузите водяной знак') return false;
+        
         var defObj,
             ajaxLoader = '<div id="ajaxloader"></div>';
 
@@ -39,7 +41,7 @@ var imgDownload = (function () {
                     $('.controllers').append(markup);
                     $('.sidebar-social__like').fadeIn('slow');
                     $('#alert').fadeIn('slow', function() {
-                        $('body').append('<iframe src="' + result + '" style="width:1px;height:1px;visibility:hidden"></iframe>');
+                    $('body').append('<iframe src="' + result + '" style="width:1px;height:1px;visibility:hidden"></iframe>');
                     });;
         });   
     });
