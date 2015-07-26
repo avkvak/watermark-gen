@@ -36,14 +36,15 @@ var imgDownload = (function () {
             $('.workspase__uploud-image').replaceWith(ajaxLoader);
         })
         .success(function(response){
-                    console.log('watermark created and downloaded');
-                    result  = 'tmpl/download.php?file=' + response;
-                    $('#ajaxloader').replaceWith('<img class="workspase__uploud-image" src="' + result +'"/>');
-                    $('.controllers').append(markup);
-                    $('.sidebar-social__like').fadeIn('slow');
-                    $('#alert').fadeIn('slow', function() {
-                    $('body').append('<iframe src="' + result + '" style="width:1px;height:1px;visibility:hidden"></iframe>');
-                    });;
+            console.log('watermark created and downloaded');
+            result  = 'tmpl/download.php?file=../uploads/watermark/' + response;
+            imgResult  = 'uploads/watermark/' + response;
+            $('#ajaxloader').replaceWith('<img class="workspase__uploud-image" src="' + imgResult +'"/>');
+            $('.controllers').append(markup);
+            $('.sidebar-social__like').fadeIn('slow');
+            $('#alert').fadeIn('slow', function() {
+                $('body').append('<iframe src="' + result + '" style="width:1px;height:1px;visibility:hidden"></iframe>');
+            });
         });   
     });
 

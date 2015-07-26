@@ -1,16 +1,12 @@
 <?php
-
 resizeImage('../' . $_POST['image'], '../uploads/files/' . $_POST['name'], '650', '580', '100');
-
-resizeImage('../' . $_POST['watermark'], '../uploads/files/' . $_POST['watermark_name'], '350', '350', '100');
 
 define('WATERMARK_SOURCE_NAME', $_POST['name']);
 define('WATERMARK_SOURCE_IMAGE', '../uploads/files/' . $_POST['name']);
 define('WATERMARK_OVERLAY_IMAGE', '../uploads/files/' . $_POST['watermark_name']);
 define('WATERMARK_OVERLAY_OPACITY', $_POST['opacity'] * 100);
 define('WATERMARK_OUTPUT_QUALITY', 90);
-define('pos_X', $_POST['normalX']);
-define('pos_Y', $_POST['normalY']);
+define('WATERMARK_OUTPUT_COORDINATES', $_POST['positionsString']);
 
 function filter_opacity(&$img, $opacity)
 {
@@ -117,7 +113,13 @@ function create_watermark($source_file_path, $output_file_path)
     $overlay_width = imagesx($overlay_gd_image);
     $overlay_height = imagesy($overlay_gd_image);
 
-    imagecopy($source_gd_image, $overlay_gd_image, pos_X, pos_Y, 0, 0, $overlay_width, $overlay_height);
+    $coordinates = explode(',', WATERMARK_OUTPUT_COORDINATES);
+
+
+    $length = count($coordinates);
+    for ($i = 0; $i < $length; $i = $i + 2) {
+        imagecopy($source_gd_image, $overlay_gd_image, $coordinates[$i], $coordinates[$i + 1], 0, 0, $overlay_width, $overlay_height);
+    }
 
     imagejpeg($source_gd_image, $output_file_path, WATERMARK_OUTPUT_QUALITY);
     imagedestroy($source_gd_image);
@@ -169,6 +171,5 @@ $result = process_image_upload();
 if ($result === false) {
     echo 'Error';
 } else {
-    echo $result[1];
-
+    echo WATERMARK_SOURCE_NAME;
 }
