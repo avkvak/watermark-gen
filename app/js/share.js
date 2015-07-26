@@ -3,8 +3,9 @@ var Share = (function() {
     var
         purl = "http://av.kvak.tmweb.ru/",
         title = document.title,
-        text = document.querySelector('meta[name="description"]').content,
-        img = purl + $('.workspase__uploud-image').attr('src');
+        text = document.querySelector('meta[name="description"]').content + '. Вот такой прикольный вотермарку у меня получился с помощью этого замечательного сервиса!',
+        img;
+
 
     function addEventListener() {
         $('#fb').on('click', fb);
@@ -14,6 +15,9 @@ var Share = (function() {
 
     function fb(e) {
         e.preventDefault();
+        img = $('.workspase__uploud-image').attr('src');
+        
+    	console.log(img);
         var url = 'http://www.facebook.com/sharer.php?s=100';
         url += '&p[title]=' + encodeURIComponent(title);
         url += '&p[summary]=' + encodeURIComponent(text);
@@ -23,6 +27,7 @@ var Share = (function() {
     }
     function tw(e) {
         e.preventDefault();
+        img = $('.workspase__uploud-image').attr('src');
         var url = 'http://twitter.com/share?';
         url += 'text=' + encodeURIComponent(title);
         url += '&url=' + encodeURIComponent(purl);
@@ -32,6 +37,7 @@ var Share = (function() {
       
     function vk(e) {
         e.preventDefault();
+        img = $('.workspase__uploud-image').attr('src');
         var url = 'http://vk.com/share.php?';
         url += 'url=' + encodeURIComponent(purl);
         url += '&title=' + encodeURIComponent(title);

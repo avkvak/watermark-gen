@@ -1,7 +1,7 @@
 <?php
 
 resizeImage('../' . $_POST['image'], '../uploads/files/' . $_POST['name'], '650', '580');
-resizeImage('../' . $_POST['watermark'], '../uploads/files/' . $_POST['watermark_name'], '350', '350');
+//resizeImage('../' . $_POST['watermark'], '../uploads/files/' . $_POST['watermark_name'], '350', '350');
 
 define('WATERMARK_SOURCE_NAME', $_POST['name']);
 define('WATERMARK_SOURCE_IMAGE', '../uploads/files/' . $_POST['name']);
