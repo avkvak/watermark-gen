@@ -1,5 +1,7 @@
 <?php
-resizeImage('../' . $_POST['image'], '../uploads/files/' . $_POST['name'], '650', '580', '100');
+
+resizeImage('../' . $_POST['image'], '../uploads/files/' . $_POST['name'], '650', '580');
+resizeImage('../' . $_POST['watermark'], '../uploads/files/' . $_POST['watermark_name'], '350', '350');
 
 define('WATERMARK_SOURCE_NAME', $_POST['name']);
 define('WATERMARK_SOURCE_IMAGE', '../uploads/files/' . $_POST['name']);
@@ -51,38 +53,33 @@ function filter_opacity(&$img, $opacity)
     return true;
 }
 
-function resizeImage($sourceImage, $targetImage, $maxWidth, $maxHeight, $quality = 80)
-{
-    if (!$image = @imagecreatefromjpeg($sourceImage)) {
+function resizeImage($target, $newcopy, $w, $h) {
+    list($w_orig, $h_orig, $source_type) = getimagesize($target);
+    $scale_ratio = $w_orig / $h_orig;
+    if (($w / $h) > $scale_ratio) {
+        $w = $h * $scale_ratio;
+    } else {
+        $h = $w / $scale_ratio;
+    }
+
+    if ($source_type === NULL) {
         return false;
     }
 
-    list($origWidth, $origHeight) = getimagesize($sourceImage);
-
-    if ($maxWidth == 0) {
-        $maxWidth = $origWidth;
+    switch ($source_type) {
+        case IMAGETYPE_JPEG:
+            $img = imagecreatefromjpeg($target);
+            break;
+        case IMAGETYPE_PNG:
+            $img = imagecreatefrompng($target);
+            break;
+        default:
+            return false;
     }
 
-    if ($maxHeight == 0) {
-        $maxHeight = $origHeight;
-    }
-
-    $widthRatio = $maxWidth / $origWidth;
-    $heightRatio = $maxHeight / $origHeight;
-
-    $ratio = min($widthRatio, $heightRatio);
-
-    $newWidth = (int)$origWidth * $ratio;
-    $newHeight = (int)$origHeight * $ratio;
-
-    $newImage = imagecreatetruecolor($newWidth, $newHeight);
-    imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $origWidth, $origHeight);
-    imagejpeg($newImage, $targetImage, $quality);
-
-    imagedestroy($image);
-    imagedestroy($newImage);
-
-    return true;
+    $tci = imagecreatetruecolor($w, $h);
+    imagecopyresampled($tci, $img, 0, 0, 0, 0, $w, $h, $w_orig, $h_orig);
+    imagejpeg($tci, $newcopy, 80);
 }
 
 function create_watermark($source_file_path, $output_file_path)
@@ -107,9 +104,29 @@ function create_watermark($source_file_path, $output_file_path)
             return false;
     }
 
-    $overlay_gd_image = imagecreatefrompng(WATERMARK_OVERLAY_IMAGE);
+    list(, , $output_type) = getimagesize(WATERMARK_OVERLAY_IMAGE);
+
+    if ($output_type === NULL) {
+        return false;
+    }
+
+    switch ($output_type) {
+        case IMAGETYPE_GIF:
+            $overlay_gd_image = imagecreatefromgif(WATERMARK_OVERLAY_IMAGE);
+            break;
+        case IMAGETYPE_JPEG:
+            $overlay_gd_image = imagecreatefromjpeg(WATERMARK_OVERLAY_IMAGE);
+            break;
+        case IMAGETYPE_PNG:
+            $overlay_gd_image = imagecreatefrompng(WATERMARK_OVERLAY_IMAGE);
+            imagealphablending($overlay_gd_image, true);
+            break;
+        default:
+            return false;
+    }
+
     filter_opacity($overlay_gd_image, WATERMARK_OVERLAY_OPACITY);
-    imagealphablending($overlay_gd_image, false);
+
     $overlay_width = imagesx($overlay_gd_image);
     $overlay_height = imagesy($overlay_gd_image);
 
@@ -121,7 +138,13 @@ function create_watermark($source_file_path, $output_file_path)
         imagecopy($source_gd_image, $overlay_gd_image, $coordinates[$i], $coordinates[$i + 1], 0, 0, $overlay_width, $overlay_height);
     }
 
-    imagejpeg($source_gd_image, $output_file_path, WATERMARK_OUTPUT_QUALITY);
+    if($source_type['mime']=='image/png') {
+        imagepng($source_gd_image, $output_file_path);
+    }
+    else {
+        imagejpeg($source_gd_image, $output_file_path, WATERMARK_OUTPUT_QUALITY);
+    }
+
     imagedestroy($source_gd_image);
     imagedestroy($overlay_gd_image);
 }
@@ -152,7 +175,7 @@ function process_image_upload()
     }
 
     $uploaded_file_path = UPLOADED_IMAGE_DESTINATION . $temp_file_name;
-    $processed_file_path = PROCESSED_IMAGE_DESTINATION . preg_replace('/\\.[^\\.]+$/', '.jpg', $temp_file_name);
+    $processed_file_path = PROCESSED_IMAGE_DESTINATION .$temp_file_name;
 
     move_uploaded_file($temp_file_path, $uploaded_file_path);
 
