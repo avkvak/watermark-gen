@@ -2,9 +2,11 @@
 
 resizeImage('../' . $_POST['image'], '../uploads/files/' . $_POST['name'], '650', '580', '100');
 
+resizeImage('../' . $_POST['watermark'], '../uploads/files/' . $_POST['watermark_name'], '350', '350', '100');
+
 define('WATERMARK_SOURCE_NAME', $_POST['name']);
 define('WATERMARK_SOURCE_IMAGE', '../uploads/files/' . $_POST['name']);
-define('WATERMARK_OVERLAY_IMAGE', '../' . $_POST['watermark']);
+define('WATERMARK_OVERLAY_IMAGE', '../uploads/files/' . $_POST['watermark_name']);
 define('WATERMARK_OVERLAY_OPACITY', $_POST['opacity'] * 100);
 define('WATERMARK_OUTPUT_QUALITY', 90);
 define('pos_X', $_POST['normalX']);

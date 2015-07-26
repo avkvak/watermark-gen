@@ -5,6 +5,7 @@ var imgDownload = (function () {
 
         var data = {
             'name': $('#input-image').val(),
+            'watermark_name': $('#input-watermark').val(),
             'image': $('#watermark__src-image').attr('src'),
             'watermark': $('#watermark__src-logo').attr('src'),
             'opacity': $('#opacity-control').val(),
